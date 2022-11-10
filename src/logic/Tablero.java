@@ -4,16 +4,15 @@ public class Tablero {
 
 
     public static void verTab(char[][] tablero, char[][] tableroEnemy) {
-        int j;
 
         for (int i = 0; i < tablero[0].length; i++) {
             System.out.println();
 
-            for (j = 0; j < tablero[0].length; j++) {
+            for (int j = 0; j < tablero[0].length; j++) {
                 System.out.print(tablero[i][j] + " ");
             }
             System.out.print("\t\t");
-            for (j = 0; j < tableroEnemy[0].length; j++) {
+            for (int j = 0; j < tableroEnemy[0].length; j++) {
                 System.out.print(tableroEnemy[i][j] + " ");
 
             }

@@ -1,0 +1,27 @@
+
+    public static String getCoordinate() {
+        Scanner sc = new Scanner(System.in);
+        String coordinate = "";
+
+       do {
+           System.out.println("introdoce una coordenada  ( LETRA NUMERO)");
+           coordinate= sc.next().toUpperCase();
+           if (!longEnought(coordinate)){
+               System.out.println("la coordenada debe estar formada por dos caracteres");
+               coordinate= sc.next().toUpperCase();
+           }else if (!isLetter(coordinate)){
+               System.out.println("la letra debe estar entra la A y la H");
+               coordinate= sc.next().toUpperCase();
+
+           }else if (!isNumber(coordinate)){
+               System.out.println("el numero  debe estar entre el 1 y el 9");
+               coordinate= sc.next().toUpperCase();
+
+           }
+
+
+       }while (isLetter(coordinate) && isNumber(coordinate) && longEnought(coordinate));
+
+
+        return coordinate;
+    }
