@@ -59,7 +59,7 @@ public class Barco {
     }
 
     public static boolean isLetter(String coord) {
-        int i = 65, end = 72;
+        int i = 65;
         boolean correct = false;
         do {
             if (coord.charAt(0) == (char) i) {
@@ -79,8 +79,10 @@ public class Barco {
 
         int i = 1;
         boolean correct = false;
+        int aux =  Character.getNumericValue(coord.charAt(1));
+
         do {
-            if (coord.charAt(1) == i) {
+            if ( aux == i) {
                 correct = true;
 
             }
