@@ -1,17 +1,27 @@
+package logic;
+
 public class Tablero {
 
 
-    public static void verTab(char[][] tablero) {
+    public static void verTab(char[][] tablero, char[][] tableroEnemy) {
+        int j;
 
-        for (int i = 0; i < tablero.length; i++) {
+        for (int i = 0; i < tablero[0].length; i++) {
             System.out.println();
-            for (int j = 0; j < tablero[0].length; j++) {
-                System.out.print(tablero[i][j] + "\t");
+
+            for (j = 0; j < tablero[0].length; j++) {
+                System.out.print(tablero[i][j] + " ");
+            }
+            System.out.print("\t\t");
+            for (j = 0; j < tableroEnemy[0].length; j++) {
+                System.out.print(tableroEnemy[i][j] + " ");
 
             }
 
         }
+
     }
+
 
     public static char[][] crearTab() {
         char[][] tablero = new char[10][10];

@@ -1,25 +1,36 @@
 package tools;
 
 
-
 import java.util.Scanner;
 
 public class Input {
-    public static String getString(String message){
+    public static String getString(String message) {
         Scanner sc = new Scanner(System.in);
         System.out.println(message);
         return sc.nextLine();
     }
-    public static int getInteger(String message){
+
+    public static int getInteger(String message) {
         Scanner sc = new Scanner(System.in);
-    //    System.out.println(message);
+        System.out.println(message);
         while (!sc.hasNextInt()) {
             System.out.println("Error. You have to enter a integer number.");
             sc.next();
         }
         return sc.nextInt();
     }
-    public static float getFloat(String message){
+
+    public static int getIntegerSmaller(String message) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(message);
+        while (!sc.hasNextInt()) {
+            System.out.println("Error. You have to enter a integer number.");
+            sc.next();
+        }
+        return sc.nextInt();
+    }
+
+    public static float getFloat(String message) {
         Scanner sc = new Scanner(System.in);
         System.out.println(message);
         while (!sc.hasNextFloat()) {
