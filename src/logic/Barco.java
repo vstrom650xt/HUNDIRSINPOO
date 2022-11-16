@@ -22,50 +22,18 @@ public class Barco {
             }
 
             System.out.println("[*]Estos son tus barcos \n" +
-                    "[*]vidas / numero de barcos");
+                               "[*]vidas / numero de barcos");
             Screen.show(arrBarc);
 
         }
         return arrBarc;
     }
-
-    public static int translateCoorLetter(String coord) {
-        char aux = (char) ('A' - (coord.charAt(0)) + 1);
-
-        return aux;
-    }
-
-
-    public static void putShip(char[][] tablero, int[][] barcosJugador) {
-
-        int aux = 0;
-        for (int i = 0; i < barcosJugador.length; i++) {
-            for (int j = 0; j < barcosJugador.length; j++) {
-                if (i == 1) {
-                    aux = barcosJugador[i][j];
-                    for (int k = 0; k < aux; k++) {
-                        System.out.println("pon el " + (k+1) + " barco");
-                        getCoordinate();
-                        translateCoorLetter();
-                        barcosJugador[i][j]--;
-                    }
-
-                }
-            }
-
-        }
-
-    }
-
-    /**
-     * @return
-     */
     public static String getCoordinate() {
         Scanner sc = new Scanner(System.in);
         String coordinate = "";
 
         do {
-            System.out.println("[*]introduce una coordenada  ( LETRA NUMERO)");
+          //  System.out.println("[*]introduce una coordenada  ( LETRA NUMERO)");
             coordinate = sc.next().toUpperCase();
 
             if (!longEnought(coordinate)) {
@@ -82,17 +50,21 @@ public class Barco {
             } else if (!correctFormat(coordinate)) {
                 System.out.println("ponga primero la letra y luego el numero");
                 coordinate = sc.next().toUpperCase();
-
-
             }
 
         } while (!longEnought(coordinate) || !isLetter(coordinate) || !isNumber(coordinate) || !correctFormat(coordinate));
 
-
+        coordinate= translateCoorLetter(coordinate) + "" + translateCoorNum(coordinate);
         return coordinate;
     }
-
-
+    public static int translateCoorLetter(String coord) {
+        char aux = (char) ((coord.charAt(0) - 'A') + 1);
+        return aux;
+    }
+    public static int translateCoorNum(String coord) {
+        int aux = Character.getNumericValue(coord.charAt(1));
+        return aux;
+    }
     public static boolean longEnought(String coord) {
         boolean correct = false;
         if (coord.length() == 2) {
@@ -102,7 +74,6 @@ public class Barco {
 
         return correct;
     }
-
     public static boolean isLetter(String coord) {
         int i = 65;
         boolean correct = false;
@@ -119,7 +90,6 @@ public class Barco {
         return correct;
 
     }
-
     public static boolean isNumber(String coord) {
         int i = 1;
         boolean correct = false;
@@ -137,7 +107,6 @@ public class Barco {
         return correct;
 
     }
-
     public static boolean correctFormat(String coord) {
         boolean correct = false;
         if (coord.charAt(0) >= 65 || coord.charAt(0) <= 73)
@@ -146,6 +115,12 @@ public class Barco {
         return correct;
 
     }
+
+    public static void  getOrientation(){
+
+
+    }
+
 
 
 }
