@@ -17,10 +17,12 @@ public class Juego {
         System.out.println();
         Tablero.verTab(tableroShootPlayer, TableroShootEnemy);
         System.out.println();
-        barcosJugador = Barco.crearBarcos();
+  //      barcosJugador = Barco.crearBarcos();
         System.out.println();
-        Barco.getCoordinate();
-     //   System.out.println(Barco.translateCoor("A"));
+     //   Barco.getCoordinate();
+        System.out.println(        Barco.translateCoorLetter("A"));
+
+        //   System.out.println(Barco.translateCoor("A"));
 
 
     }

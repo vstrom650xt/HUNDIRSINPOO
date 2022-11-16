@@ -29,51 +29,64 @@ public class Barco {
         return arrBarc;
     }
 
-//    public static int translateCoor(String coord){
-//
-//      //  char aux = (coord.charAt(0) - coord.charAt(0));
-//
-//
-//
-//
-//        return aux;
-//
-//
-//    }
+    public static int translateCoorLetter(String coord) {
+        char aux = (char) ('A' - (coord.charAt(0)) + 1);
 
+        return aux;
+    }
+
+
+    public static void putShip(char[][] tablero, int[][] barcosJugador) {
+
+        int aux = 0;
+        for (int i = 0; i < barcosJugador.length; i++) {
+            for (int j = 0; j < barcosJugador.length; j++) {
+                if (i == 1) {
+                    aux = barcosJugador[i][j];
+                    for (int k = 0; k < aux; k++) {
+                        System.out.println("pon el " + (k+1) + " barco");
+                        getCoordinate();
+                        translateCoorLetter();
+                        barcosJugador[i][j]--;
+                    }
+
+                }
+            }
+
+        }
+
+    }
 
     /**
-     *
-     *
      * @return
      */
     public static String getCoordinate() {
         Scanner sc = new Scanner(System.in);
         String coordinate = "";
 
-       do {
-           System.out.println("[*]introduce una coordenada  ( LETRA NUMERO)");
-           coordinate= sc.next().toUpperCase();
+        do {
+            System.out.println("[*]introduce una coordenada  ( LETRA NUMERO)");
+            coordinate = sc.next().toUpperCase();
 
-           if (!longEnought(coordinate)){
-               System.out.println("la coordenada debe estar formada por dos caracteres");
-               coordinate= sc.next().toUpperCase();
-           }else if (!isLetter(coordinate)){
-               System.out.println("la letra debe estar entre la A y la I");
-               coordinate= sc.next().toUpperCase();
+            if (!longEnought(coordinate)) {
+                System.out.println("la coordenada debe estar formada por dos caracteres");
+                coordinate = sc.next().toUpperCase();
+            } else if (!isLetter(coordinate)) {
+                System.out.println("la letra debe estar entre la A y la I");
+                coordinate = sc.next().toUpperCase();
 
-           }else if (!isNumber(coordinate)){
-               System.out.println("el numero  debe estar entre el 1 y el 9");
-               coordinate= sc.next().toUpperCase();
+            } else if (!isNumber(coordinate)) {
+                System.out.println("el numero  debe estar entre el 1 y el 9");
+                coordinate = sc.next().toUpperCase();
 
-           } else if (!correctFormat(coordinate)) {
-               System.out.println("ponga primero la letra y luego el numero");
-               coordinate= sc.next().toUpperCase();
+            } else if (!correctFormat(coordinate)) {
+                System.out.println("ponga primero la letra y luego el numero");
+                coordinate = sc.next().toUpperCase();
 
 
-           }
+            }
 
-       }while (!longEnought(coordinate)||!isLetter(coordinate)|| !isNumber(coordinate)|| !correctFormat(coordinate) );
+        } while (!longEnought(coordinate) || !isLetter(coordinate) || !isNumber(coordinate) || !correctFormat(coordinate));
 
 
         return coordinate;
@@ -110,12 +123,12 @@ public class Barco {
     public static boolean isNumber(String coord) {
         int i = 1;
         boolean correct = false;
-        int aux =  Character.getNumericValue(coord.charAt(1));
-        if (aux==0)
-            correct=false;
+        int aux = Character.getNumericValue(coord.charAt(1));
+        if (aux == 0)
+            correct = false;
 
         do {
-            if ( aux == i) {
+            if (aux == i) {
                 correct = true;
             }
             i++;
@@ -124,17 +137,15 @@ public class Barco {
         return correct;
 
     }
+
     public static boolean correctFormat(String coord) {
-        boolean correct= false;
-        if (coord.charAt(0)>=65  || coord.charAt(0) <=73)
-            correct=true;
+        boolean correct = false;
+        if (coord.charAt(0) >= 65 || coord.charAt(0) <= 73)
+            correct = true;
 
         return correct;
 
     }
-
-
-
 
 
 }
