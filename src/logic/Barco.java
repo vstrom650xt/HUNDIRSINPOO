@@ -59,7 +59,8 @@ public class Barco {
         return coordinate;
     }
 
-    public static void getOrientation(int coordLett, int coordNum, char[][] tablero, int[][] barcosJugador) {
+    //poner en getCoordinate que pida orienta tambien , qretorne v o h
+    public static char getOrientation(int[][] barcosJugador) {
         Scanner sc = new Scanner(System.in);
         char decision = ' ';
         int aux = 0;
@@ -69,23 +70,66 @@ public class Barco {
             for (int i = 0; i < barcosJugador.length; i++) {
                 for (int j = 0; j < barcosJugador.length; j++) {
                     if (decision == 'V') {
-                        tablero[coordLett][coordNum] = 'B';
-                        tablero[coordLett+1][coordNum] = 'B';
-
-
-
+                        decision = 'V';
                     } else if (decision == 'H') {
-
+                        decision = 'H';
                     }
-
                 }
             }
 
-
         } while (decision != 'V' && decision != 'H');
 
+        return decision;
+    }
+
+    public static void putOnTab(int coordLett, int coordNum, char orientation, char[][] tablero, int[][] barcosJugador, int sizeShip) {
+
+        //juego con las vidas de los barcos
+        int aux, twoLives = barcosJugador[0][1], treeLives = barcosJugador[0][2];
+        if (sizeShip == 2) {
+            if (orientation == 'V') {
+                tablero[coordLett][coordNum] = 'B';
+                tablero[coordLett + 1][coordNum] = 'B';
+            } else {
+
+                tablero[coordLett][coordNum] = 'B';
+                tablero[coordLett][coordNum + 1] = 'B';
+            }
+        } else {
+            if (orientation == 'V') {
+                tablero[coordLett][coordNum] = 'B';
+                tablero[coordLett + 1][coordNum] = 'B';
+                tablero[coordLett + 2][coordNum] = 'B';
+
+            } else {
+
+                tablero[coordLett][coordNum] = 'B';
+                if (tablero[coordLett][coordNum+1]>tablero.length){
+                    System.out.println("te sales del tablero");
+
+                }else {
+                    tablero[coordLett][coordNum + 1] = 'B';
+                    tablero[coordLett][coordNum + 2] = 'B';
+                }
+
+
+
+            }
+
+        }
 
     }
+//    public static  boolean outOfMap(){
+//
+//
+//
+//    }
+//    public static  boolean colisionCheck(){
+//
+//
+//
+//    }
+
 
     public static int translateCoorLetter(String coord) {
         char aux = (char) ((coord.charAt(0) - 'A') + 1);
