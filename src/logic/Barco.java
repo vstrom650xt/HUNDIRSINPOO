@@ -102,7 +102,7 @@ public class Barco {
                 tablero[coordLett + 2][coordNum] = 'B';
 
             } else {
-
+/////////////////////////////////ESTABA AQUI PONIENDO LOS IFS//////////
                 tablero[coordLett][coordNum] = 'B';
                 if (tablero[coordLett][coordNum+1]>tablero.length){
                     System.out.println("te sales del tablero");
@@ -119,11 +119,7 @@ public class Barco {
         }
 
     }
-//    public static  boolean outOfMap(){
-//
-//
-//
-//    }
+
 //    public static  boolean colisionCheck(){
 //
 //
