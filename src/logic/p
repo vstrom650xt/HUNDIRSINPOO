@@ -1,64 +1,56 @@
-    public static void putShip(char[][] tablero, int[][] barcosJugador) {
-        int coordLett = 0, coordNum = 0;
-        String coord = "";
-        int aux = 0;
-        for (int i = 0; i < barcosJugador.length; i++) {
-            for (int j = 0; j < barcosJugador[i].length; j++) {
-                if (i == 1) {
-                    aux = barcosJugador[i][j];
-                    //esto esta mal
-                    for (int k = 0; k < aux; k++) {
-                        System.out.println("pon el barco ");
-                        coord = getCoordinate();
-                        coordLett = Character.getNumericValue(coord.charAt(0));
-                        coordNum = Character.getNumericValue(coord.charAt(1));
-                        Barco.getOrientation(coordLett,coordNum,tablero,barcosJugador);
 
-                        barcosJugador[i][j]--;
-                    }
+    public static Boolean putOnTab(int coordLett, int coordNum, char orientation, char[][] tablero, int[][] barcosJugador, int sizeShip) {
+
+        //juego con las vidas de los barcos
+        if (sizeShip == 2) {
+            if (orientation == 'V') {
+                tablero[coordLett][coordNum] = 'B';
+                if (tablero[coordLett - 1][coordNum] > tablero.length || tablero[coordLett + 1][coordNum] < tablero.length) {
+                    System.out.println("te sales del tablero");
+                    return  false;                 
+                } else {
+                    tablero[coordLett + 1][coordNum] = 'B';
+                    return  true;
+
                 }
+            } else if (orientation=='H'){
+                tablero[coordLett][coordNum] = 'B';
+                if (tablero[coordLett][coordNum +1] > tablero.length || tablero[coordLett + 1][coordNum] < tablero.length) {
+                    tablero[coordLett][coordNum + 1] = 'B';
+                    return  false;
+                }else{
+                    tablero[coordLett][coordNum + 1] = 'B';
+                    return  true;
+
+                } 
+
+            }
+        } else if (sizeShip == 3) {
+            if (orientation == 'V') {
+                tablero[coordLett][coordNum] = 'B';
+                tablero[coordLett + 1][coordNum] = 'B';
+                tablero[coordLett + 2][coordNum] = 'B';
+                return  false;
+
+
+            } else {
+                tablero[coordLett][coordNum] = 'B';
+                if (tablero[coordLett][coordNum + 1] > tablero.length || tablero[coordLett][coordNum + 1] < tablero.length) {
+                    System.out.println("te sales del tablero");
+                    return  false;
+
+
+                } else {
+                    tablero[coordLett][coordNum + 1] = 'B';
+                    tablero[coordLett][coordNum + 2] = 'B';
+
+                    return  false;
+
+                }
+
+
             }
 
         }
-
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public static void putShip(char[][] tablero, int[][] barcosJugador) {
-            int coordLett = 0, coordNum = 0,aux = 0;
-            String coord = "";
-            char orientation;
-
-            for (int i = 0; i < barcosJugador.length; i++) {
-                for (int j = 0; j < barcosJugador[i].length; j++) {
-                    if (i == 1) {
-                        aux = barcosJugador[i][j];
-                        //condicional si el barco es mayor que 1 pedir orien sino no jugar con la i
-                        for (int k = 0; k < aux; k++) {
-                            System.out.println("pon el barco " + (i));
-                            coord = getCoordinate();
-                            coordLett = Character.getNumericValue(coord.charAt(0));
-                            coordNum = Character.getNumericValue(coord.charAt(1));
-                            orientation=Barco.getOrientation(coordLett,coordNum,tablero,barcosJugador);
-                            barcosJugador[i][j]--;
-                        }
-                    }
-                }
-
-            }
-
-
-        }
-

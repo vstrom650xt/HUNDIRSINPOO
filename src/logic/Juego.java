@@ -13,14 +13,12 @@ public class Juego {
 
     public static void main(String[] args) {
 
-        Tablero.verTab(tableroPlayer, tableroEnemy);
-        System.out.println();
         Tablero.verTab(tableroShootPlayer, TableroShootEnemy);
         System.out.println();
         barcosJugador = Barco.crearBarcos();
-        System.out.println();
         Jugador.putShip(tableroPlayer,barcosJugador);
         Tablero.verTab(tableroPlayer, tableroEnemy);
+        System.out.println();
 
 
     }
