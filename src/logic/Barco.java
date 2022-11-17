@@ -57,6 +57,27 @@ public class Barco {
         coordinate= translateCoorLetter(coordinate) + "" + translateCoorNum(coordinate);
         return coordinate;
     }
+
+    public static void  getOrientation(int coordLett, int coordNum,char[][] tablero,int[][] barcosJugador){
+        Scanner sc = new Scanner(System.in);
+        char decision=' ';
+        int aux=0;
+        do{
+            System.out.println("elige posicion vertical (V) u horizontal (H)");
+            decision = sc.next().toUpperCase().charAt(0);
+            if (decision == 'V'){
+                tablero[coordLett][coordNum] = 'B';
+
+            } else if (decision == 'H') {
+
+            }
+
+        }while (decision != 'V' && decision!= 'H');
+
+
+
+    }
+
     public static int translateCoorLetter(String coord) {
         char aux = (char) ((coord.charAt(0) - 'A') + 1);
         return aux;
@@ -116,10 +137,6 @@ public class Barco {
 
     }
 
-    public static void  getOrientation(){
-
-
-    }
 
 
 

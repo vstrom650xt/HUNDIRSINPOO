@@ -12,13 +12,14 @@ public class Jugador {
             for (int j = 0; j < barcosJugador[i].length; j++) {
                 if (i == 1) {
                     aux = barcosJugador[i][j];
+                    //esto esta mal
                     for (int k = 0; k < aux; k++) {
-                        System.out.println("pon el  " + (k + 1) + "barco");
+                        System.out.println("pon el " + (k + 1) + " barco");
                         coord = getCoordinate();
                         coordLett = Character.getNumericValue(coord.charAt(0));
                         coordNum = Character.getNumericValue(coord.charAt(1));
-                        tablero[coordLett][coordNum] = 'B';
-                        //el problema esta en la orientacion
+                        Barco.getOrientation(coordLett,coordNum,tablero,barcosJugador);
+
                         barcosJugador[i][j]--;
                     }
                 }
