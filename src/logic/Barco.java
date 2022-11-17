@@ -22,18 +22,19 @@ public class Barco {
             }
 
             System.out.println("[*]Estos son tus barcos \n" +
-                               "[*]vidas / numero de barcos");
+                    "[*]vidas / numero de barcos");
             Screen.show(arrBarc);
 
         }
         return arrBarc;
     }
+
     public static String getCoordinate() {
         Scanner sc = new Scanner(System.in);
         String coordinate = "";
 
         do {
-          //  System.out.println("[*]introduce una coordenada  ( LETRA NUMERO)");
+            //  System.out.println("[*]introduce una coordenada  ( LETRA NUMERO)");
             coordinate = sc.next().toUpperCase();
 
             if (!longEnought(coordinate)) {
@@ -54,26 +55,34 @@ public class Barco {
 
         } while (!longEnought(coordinate) || !isLetter(coordinate) || !isNumber(coordinate) || !correctFormat(coordinate));
 
-        coordinate= translateCoorLetter(coordinate) + "" + translateCoorNum(coordinate);
+        coordinate = translateCoorLetter(coordinate) + "" + translateCoorNum(coordinate);
         return coordinate;
     }
 
-    public static void  getOrientation(int coordLett, int coordNum,char[][] tablero,int[][] barcosJugador){
+    public static void getOrientation(int coordLett, int coordNum, char[][] tablero, int[][] barcosJugador) {
         Scanner sc = new Scanner(System.in);
-        char decision=' ';
-        int aux=0;
-        do{
+        char decision = ' ';
+        int aux = 0;
+        do {
             System.out.println("elige posicion vertical (V) u horizontal (H)");
             decision = sc.next().toUpperCase().charAt(0);
-            if (decision == 'V'){
-                tablero[coordLett][coordNum] = 'B';
+            for (int i = 0; i < barcosJugador.length; i++) {
+                for (int j = 0; j < barcosJugador.length; j++) {
+                    if (decision == 'V') {
+                        tablero[coordLett][coordNum] = 'B';
+                        tablero[coordLett+1][coordNum] = 'B';
 
-            } else if (decision == 'H') {
 
+
+                    } else if (decision == 'H') {
+
+                    }
+
+                }
             }
 
-        }while (decision != 'V' && decision!= 'H');
 
+        } while (decision != 'V' && decision != 'H');
 
 
     }
@@ -82,10 +91,12 @@ public class Barco {
         char aux = (char) ((coord.charAt(0) - 'A') + 1);
         return aux;
     }
+
     public static int translateCoorNum(String coord) {
         int aux = Character.getNumericValue(coord.charAt(1));
         return aux;
     }
+
     public static boolean longEnought(String coord) {
         boolean correct = false;
         if (coord.length() == 2) {
@@ -95,6 +106,7 @@ public class Barco {
 
         return correct;
     }
+
     public static boolean isLetter(String coord) {
         int i = 65;
         boolean correct = false;
@@ -111,6 +123,7 @@ public class Barco {
         return correct;
 
     }
+
     public static boolean isNumber(String coord) {
         int i = 1;
         boolean correct = false;
@@ -128,6 +141,7 @@ public class Barco {
         return correct;
 
     }
+
     public static boolean correctFormat(String coord) {
         boolean correct = false;
         if (coord.charAt(0) >= 65 || coord.charAt(0) <= 73)
@@ -136,8 +150,6 @@ public class Barco {
         return correct;
 
     }
-
-
 
 
 }
