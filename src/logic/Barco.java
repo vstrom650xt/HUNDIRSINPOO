@@ -1,6 +1,5 @@
 package logic;
 
-import tools.Input;
 import tools.Screen;
 
 import java.util.Scanner;
@@ -82,61 +81,49 @@ public class Barco {
         return decision;
     }
 
-    public static Boolean putOnTab(int coordLett, int coordNum, char orientation, char[][] tablero, int[][] barcosJugador, int sizeShip) {
+    public static Boolean drawShip(int coordLett, int coordNum, char orientation, char[][] tablero, int[][] barcosJugador, int sizeShip) {
         boolean correct = false;
         //juego con las vidas de los barcos
         if (sizeShip == 2) {
             if (orientation == 'V') {
-                tablero[coordLett][coordNum] = 'B';
                 if (coordLett + 1 >= 10) {
-                    tablero[coordLett][coordNum] = '~';
                     System.out.println("te sales del tablero");
                 } else {
-                    if (!isShip(coordLett, coordNum, tablero)) {
-                        tablero[coordLett + 1][coordNum] = 'B';
-                        correct = true;
-                    }
+                    tablero[coordLett][coordNum] = 'B';
+                    tablero[coordLett + 1][coordNum] = 'B';
+                    correct = true;
                 }
             } else if (orientation == 'H') {
-                tablero[coordLett][coordNum] = 'B';
-                tablero[coordLett][coordNum] = '~';
                 if (coordNum + 1 >= 10) {
                     System.out.println("te sales del tablero");
                 } else {
-                    if (!isShip(coordLett, coordNum, tablero)) {
-                        tablero[coordLett][coordNum + 1] = 'B';
-                        correct = true;
-                    }
+                    tablero[coordLett][coordNum] = 'B';
+                    tablero[coordLett][coordNum + 1] = 'B';
+                     correct = true;
 
                 }
 
             }
         } else if (sizeShip == 3) {
             if (orientation == 'V') {
-                tablero[coordLett][coordNum] = 'B';
                 if (coordLett + 1 >= 10) {
-                    tablero[coordLett][coordNum] = '~';
                     System.out.println("te sales del tablero");
                 } else {
-                    if (!isShip(coordLett, coordNum, tablero)) {
+                    tablero[coordLett][coordNum] = 'B';
                         tablero[coordLett + 1][coordNum] = 'B';
                         tablero[coordLett + 2][coordNum] = 'B';
                         correct = true;
-                    }
                 }
 
             } else if (orientation == 'H') {
-                tablero[coordLett][coordNum] = 'B';
                 if (coordNum + 1 >= 10) {
-                    tablero[coordLett][coordNum] = '~';
                     System.out.println("te sales del tablero");
                 } else {
-                    if (!isShip(coordLett, coordNum, tablero)) {
+                        tablero[coordLett][coordNum] = 'B';
                         tablero[coordLett][coordNum + 1] = 'B';
                         tablero[coordLett][coordNum + 2] = 'B';
                         correct = true;
 
-                    }
                 }
 
             }

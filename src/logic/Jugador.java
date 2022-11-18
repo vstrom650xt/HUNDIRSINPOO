@@ -33,9 +33,10 @@ public class Jugador {
                             coordLett = Character.getNumericValue(coord.charAt(0));
                             coordNum = Character.getNumericValue(coord.charAt(1));
                             orientation = Barco.getOrientation(barcosJugador);
-                            putIt = putOnTab(coordLett, coordNum, orientation, tablero, barcosJugador, 2);
+                            putIt = drawShip(coordLett, coordNum, orientation, tablero, barcosJugador, 2);
 
                         } while (!putIt);
+                        tools.Screen.show(tablero);
                         barcosJugador[i][j]--;
                     }
 
@@ -47,7 +48,7 @@ public class Jugador {
                         coordLett = Character.getNumericValue(coord.charAt(0));
                         coordNum = Character.getNumericValue(coord.charAt(1));
                         orientation = Barco.getOrientation(barcosJugador);
-                        putOnTab(coordLett, coordNum, orientation, tablero, barcosJugador, 3);
+                        drawShip(coordLett, coordNum, orientation, tablero, barcosJugador, 3);
                         barcosJugador[i][j]--;
                     }
 
