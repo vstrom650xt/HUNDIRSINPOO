@@ -1,5 +1,6 @@
 package logic;
 
+import tools.Input;
 import tools.Screen;
 
 import java.util.Scanner;
@@ -33,7 +34,6 @@ public class Barco {
         String coordinate = "";
 
         do {
-            //  System.out.println("[*]introduce una coordenada  ( LETRA NUMERO)");
             coordinate = sc.next().toUpperCase();
 
             if (!longEnought(coordinate)) {
@@ -64,8 +64,9 @@ public class Barco {
         char decision = ' ';
         int aux = 0;
         do {
-            System.out.println("elige posicion vertical (V) u horizontal (H)");
-            decision = sc.next().toUpperCase().charAt(0);
+//            System.out.println("elige posicion vertical (V) u horizontal (H)");
+//            decision = sc.next().toUpperCase().charAt(0);
+            decision= Input.getChar("elige posicion vertical (V) u horizontal (H)");
             for (int i = 0; i < barcosJugador.length; i++) {
                 for (int j = 0; j < barcosJugador.length; j++) {
                     if (decision == 'V') {
@@ -150,6 +151,7 @@ public class Barco {
 
     public static int translateCoorNum(String coord) {
         int aux = Character.getNumericValue(coord.charAt(1));
+       // int aux2= Integer.parseInt(String.valueOf(coord.charAt(1)));
         return aux;
     }
 

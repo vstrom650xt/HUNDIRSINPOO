@@ -39,4 +39,13 @@ public class Input {
         }
         return sc.nextFloat();
     }
+
+   public static char getChar(String message){
+       Scanner sc = new Scanner(System.in);
+       System.out.println(message);
+
+        return sc.nextLine().charAt(0);
+
+
+   }
 }
