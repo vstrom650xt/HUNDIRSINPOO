@@ -15,9 +15,9 @@ public class Jugador {
                 putIt = false;
                 System.out.println("pon el " + (k + 1) + " barco de " + (barcosJugador[0][0]) + " vida");
                 coord = getCoordinate();
-                coordLett = Character.getNumericValue(coord.charAt(0));
-                coordNum = Character.getNumericValue(coord.charAt(1));
-                if (!isShip(coordLett, coordNum, tablero)) {
+                coordNum = Character.getNumericValue(coord.charAt(0));
+                coordLett = Character.getNumericValue(coord.charAt(1));
+                if (!isShip(coordNum,coordLett , tablero)) {
                     tablero[coordNum][coordLett] = 'B';
                     barcosJugador[1][0]--;
                     putIt = true;
@@ -34,10 +34,10 @@ public class Jugador {
                 putIt = false;
                 System.out.println("pon el " + (k + 1) + " barco de " + (barcosJugador[0][1]) + " vidas");
                 coord = getCoordinate();
-                coordLett = Character.getNumericValue(coord.charAt(0));
-                coordNum = Character.getNumericValue(coord.charAt(1));
+                coordNum = Character.getNumericValue(coord.charAt(0));
+                coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Barco.getOrientation(barcosJugador);
-                if (isBigShip(coordLett, coordNum, tablero, 2, orientation)) {
+                if (isBigShip(coordNum,coordLett , tablero, 2, orientation)) {
                     putIt = drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 2);
                 }
 
@@ -53,13 +53,16 @@ public class Jugador {
                 putIt = false;
                 System.out.println("pon el " + (k + 1) + " barco de " + (barcosJugador[0][2]) + " vidas");
                 coord = getCoordinate();
-                coordLett = Character.getNumericValue(coord.charAt(0));
-                coordNum = Character.getNumericValue(coord.charAt(1));
+                coordNum = Character.getNumericValue(coord.charAt(0));
+
+                coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Barco.getOrientation(barcosJugador);
-                if (isBigShip(coordLett, coordNum, tablero, 3, orientation)) {
+                if (isBigShip(coordNum, coordLett, tablero, 3, orientation)) {
                     putIt = drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 3);
                 }
             } while (!putIt);
+            tools.Screen.show(tablero);
+
             barcosJugador[1][2]--;
 
         }

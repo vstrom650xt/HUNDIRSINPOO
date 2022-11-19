@@ -28,32 +28,10 @@ public class Barco {
         return arrBarc;
     }
 
-    public static String getCoordinate() {
-        Scanner sc = new Scanner(System.in);
-        String coordinate = "";
-
-        do {
-            coordinate = sc.next().toUpperCase();
-            if (!longEnought(coordinate)) {
-                System.out.println("la coordenada debe estar formada por dos caracteres");
-            } else if (!isLetter(coordinate)) {
-                System.out.println("la letra debe estar entre la A y la I");
-            } else if (!isNumber(coordinate)) {
-                System.out.println("el numero  debe estar entre el 1 y el 9");
-            } else if (!correctFormat(coordinate)) {
-                System.out.println("ponga primero la letra y luego el numero");
-            }
-
-        } while (!longEnought(coordinate) || !isLetter(coordinate) || !isNumber(coordinate) || !correctFormat(coordinate));
-        coordinate = translateCoorLetter(coordinate) + "" + translateCoorNum(coordinate);
-        return coordinate;
-    }
 
     //poner en getCoordinate que pida orienta tambien , qretorne v o h
     public static char getOrientation(int[][] barcosJugador) {
-        Scanner sc = new Scanner(System.in);
-        char decision = ' ';
-        int aux = 0;
+        char decision;
         do {
 
             decision = Input.getChar("elige posicion vertical (V) u horizontal (H)");
@@ -179,14 +157,23 @@ public class Barco {
     public static boolean isShip(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
         //comprobar fila de arriba B
-        if (coordLett == 1) {
-            if (tablero[coordLett][coordNumb] == 'B' || tablero[coordLett + 1][coordNumb] == 'B' || tablero[coordLett][coordNumb + 1] == 'B' || tablero[coordLett][coordNumb - 1] == 'B') {
+        if (coordNumb == 1 && coordLett !=9) {
+            if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb + 1][coordLett] == 'B' || tablero[coordNumb][coordLett + 1] == 'B' || tablero[coordNumb][coordLett - 1] == 'B') {
                 System.out.println("ya hay un barco");
                 its = true;
             }
-        } else if (coordLett==1 && coordNumb==9) {
 
-            if (tablero[coordLett][coordNumb] == 'B' || tablero[coordLett + 1][coordNumb] == 'B' || tablero[coordLett - 1][coordNumb] == 'B' || tablero[coordLett][coordNumb + 1] == 'B' || tablero[coordLett][coordNumb - 1] == 'B') {
+            //fila arriba y parte derecha
+        } else if (coordNumb==1 && coordLett ==9) {
+            if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb + 1][coordLett] == 'B' ||  tablero[coordNumb][coordLett - 1] == 'B') {
+                System.out.println("ya hay un barco");
+                its = true;
+            }
+
+            //fila abajo izquierda
+        } else if (coordNumb==9 &&coordLett == 9) {
+
+            if (tablero[coordLett][coordNumb] == 'B' || tablero[coordLett - 1][coordNumb] == 'B' ||  tablero[coordLett][coordNumb - 1] == 'B') {
                 System.out.println("ya hay un barco");
                 its = true;
             }
@@ -202,14 +189,34 @@ public class Barco {
         return its;
     }
 
+    public static String getCoordinate() {
+        Scanner sc = new Scanner(System.in);
+        String coordinate;
+
+        do {
+            coordinate = sc.next().toUpperCase();
+            if (!longEnought(coordinate)) {
+                System.out.println("la coordenada debe estar formada por dos caracteres");
+            } else if (!correctFormat(coordinate)) {
+                System.out.println("ponga primero el numero y luego la letra");
+            } else if (!isLetter(coordinate)) {
+                System.out.println("la letra debe estar entre la A y la I");
+            } else if (!isNumber(coordinate)) {
+                System.out.println("el numero  debe estar entre el 1 y el 9");
+            }
+
+        } while (!longEnought(coordinate) || !isLetter(coordinate) || !isNumber(coordinate) || !correctFormat(coordinate));
+        coordinate = translateCoorNum(coordinate) + "" + translateCoorLetter(coordinate);
+        return coordinate;
+    }
+
     public static int translateCoorLetter(String coord) {
-        char aux = (char) ((coord.charAt(0) - 'A') + 1);
+        char aux = (char) ((coord.charAt(1) - 'A') + 1);
         return aux;
     }
 
     public static int translateCoorNum(String coord) {
-        int aux = Character.getNumericValue(coord.charAt(1));
-        // int aux2= Integer.parseInt(String.valueOf(coord.charAt(1)));
+        int aux = Character.getNumericValue(coord.charAt(0));
         return aux;
     }
 
@@ -228,7 +235,7 @@ public class Barco {
         boolean correct = false;
 
         do {
-            if (coord.charAt(0) == (char) (i)) {
+            if (coord.charAt(1) == (char) (i)) {
                 correct = true;
 
             }
@@ -243,7 +250,7 @@ public class Barco {
     public static boolean isNumber(String coord) {
         int i = 1;
         boolean correct = false;
-        int aux = Character.getNumericValue(coord.charAt(1));
+        int aux = Character.getNumericValue(coord.charAt(0));
         if (aux == 0) correct = false;
 
         do {
@@ -259,7 +266,8 @@ public class Barco {
 
     public static boolean correctFormat(String coord) {
         boolean correct = false;
-        if (coord.charAt(0) >= 65 || coord.charAt(0) <= 73) correct = true;
+        if (coord.charAt(0) >= 49 && coord.charAt(0) <= 57 && coord.charAt(1) >= 65 && coord.charAt(1) <= 73)
+            correct = true;
 
         return correct;
 
