@@ -37,7 +37,7 @@ public class Jugador {
                 coordNum = Character.getNumericValue(coord.charAt(0));
                 coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Barco.getOrientation(barcosJugador);
-                if (isBigShip(coordNum,coordLett , tablero, 2, orientation)) {
+                if (!isBigShip(coordNum,coordLett , tablero, 2, orientation)) {
                     putIt = drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 2);
                 }
 
@@ -57,7 +57,7 @@ public class Jugador {
 
                 coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Barco.getOrientation(barcosJugador);
-                if (isBigShip(coordNum, coordLett, tablero, 3, orientation)) {
+                if (!isBigShip(coordNum, coordLett, tablero, 3, orientation)) {
                     putIt = drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 3);
                 }
             } while (!putIt);

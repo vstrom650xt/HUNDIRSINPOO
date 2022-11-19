@@ -1,8 +1,50 @@
-    public static boolean isShip(int coordLet, int coorNum, char[][] tablero) {
+ public static boolean isBigShip(int coordNumb, int coordLett, char[][] tablero, int size, char orientation) {
         boolean its = false;
-        if (tablero[coordLet][coorNum] == 'B') {
-            System.out.println("ya hay un barco");
-            its = true;
+        if (size == 2) {
+
+            if (orientation == 'V' && coordLett == 1) {
+
+                //posicion actual                    //1 alante                                    2 alante                                                  1derecha                                                       1izquieda            1alante 1derecha                                1alante 1izquierda                  2alante 1 izquieda                              2alante 1derecha
+                if (tablero[coordLett][coordNumb] == 'B' || tablero[coordLett + 1][coordNumb] == 'B' || tablero[coordLett + 2][coordNumb] == 'B' || tablero[coordLett][coordNumb + 1] == 'B' || tablero[coordLett][coordNumb - 1] == 'B' || tablero[coordLett + 1][coordNumb + 1] == 'B' || tablero[coordLett + 1][coordNumb - 1] == 'B' || tablero[coordLett + 2][coordNumb - 1] == 'B' || tablero[coordLett + 2][coordNumb + 1] == 'B') {
+                    System.out.println("ya hay un barco");
+
+                    its = true;
+                }
+
+                //esto para la  B del mapa y el borde
+            } else if (orientation == 'V' && coordLett > 1) {
+
+                //posicion actual                    //1 alante                                    2 alante                                             1 atras               1derecha                                                       1izquieda            1alante 1derecha                                1alante 1izquierda                  2alante 1 izquieda                              2alante 1derecha
+                if (tablero[coordLett][coordNumb] == 'B' || tablero[coordLett + 1][coordNumb] == 'B' || tablero[coordLett + 2][coordNumb] == 'B' || tablero[coordLett - 1][coordNumb] == 'B' || tablero[coordLett][coordNumb + 1] == 'B' || tablero[coordLett][coordNumb - 1] == 'B' || tablero[coordLett + 1][coordNumb + 1] == 'B' || tablero[coordLett + 1][coordNumb - 1] == 'B' || tablero[coordLett + 2][coordNumb - 1] == 'B' || tablero[coordLett + 2][coordNumb + 1] == 'B') {
+                    System.out.println("ya hay un barco");
+
+                    its = true;
+                }
+            } else if (orientation == 'H' && coordLett == 1) {
+                if (tablero[coordLett][coordNumb] == 'B' || tablero[coordLett][coordNumb + 1] == 'B') {
+                    System.out.println("ya hay un barco");
+
+                    its = true;
+                }
+
+            }
+
+        } else if (size == 3) {
+            if (orientation == 'V') {
+                if (tablero[coordLett][coordNumb] == 'B' || tablero[coordLett + 1][coordNumb] == 'B' || tablero[coordLett + 2][coordNumb] == 'B') {
+                    System.out.println("ya hay un barco");
+
+                    its = true;
+                }
+            } else if (orientation == 'H') {
+                if (tablero[coordLett][coordNumb] == 'B' || tablero[coordLett][coordNumb + 1] == 'B' || tablero[coordLett][coordNumb + 2] == 'B') {
+                    System.out.println("ya hay un barco");
+
+                    its = true;
+                }
+
+            }
+
         }
-        return its;
+        return !its;
     }
