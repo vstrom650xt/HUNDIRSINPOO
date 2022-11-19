@@ -13,8 +13,8 @@ public class Barco {
         for (int i = 0; i < arrBarc.length; i++) {
             for (int j = 0; j < arrBarc[0].length; j++) {
                 arrBarc[0][j] = 1 + i++;
-                System.out.println("[*]introduce el numero de barcos de " + i + " vida/s");
-                arrBarc[1][j] = sc.nextInt();
+                //  System.out.println("[*]introduce el numero de barcos de " + i + " vida/s");
+                arrBarc[1][j] = Input.getInteger("[*]introduce el numero de barcos de " + i + " vida/s");
                 while (arrBarc[1][j] > 2 || arrBarc[1][j] <= 0) {
                     System.out.println("no puedes tener mas de 2 barcos de cada tipo ni ir sin barcos!");
                     arrBarc[1][j] = sc.nextInt();
@@ -64,9 +64,8 @@ public class Barco {
         char decision = ' ';
         int aux = 0;
         do {
-//            System.out.println("elige posicion vertical (V) u horizontal (H)");
-//            decision = sc.next().toUpperCase().charAt(0);
-            decision= Input.getChar("elige posicion vertical (V) u horizontal (H)");
+
+            decision = Input.getChar("elige posicion vertical (V) u horizontal (H)");
             for (int i = 0; i < barcosJugador.length; i++) {
                 for (int j = 0; j < barcosJugador.length; j++) {
                     if (decision == 'V') {
@@ -100,7 +99,7 @@ public class Barco {
                 } else {
                     tablero[coordLett][coordNum] = 'B';
                     tablero[coordLett][coordNum + 1] = 'B';
-                     correct = true;
+                    correct = true;
 
                 }
 
@@ -111,19 +110,19 @@ public class Barco {
                     System.out.println("te sales del tablero");
                 } else {
                     tablero[coordLett][coordNum] = 'B';
-                        tablero[coordLett + 1][coordNum] = 'B';
-                        tablero[coordLett + 2][coordNum] = 'B';
-                        correct = true;
+                    tablero[coordLett + 1][coordNum] = 'B';
+                    tablero[coordLett + 2][coordNum] = 'B';
+                    correct = true;
                 }
 
             } else if (orientation == 'H') {
                 if (coordNum + 1 >= 10) {
                     System.out.println("te sales del tablero");
                 } else {
-                        tablero[coordLett][coordNum] = 'B';
-                        tablero[coordLett][coordNum + 1] = 'B';
-                        tablero[coordLett][coordNum + 2] = 'B';
-                        correct = true;
+                    tablero[coordLett][coordNum] = 'B';
+                    tablero[coordLett][coordNum + 1] = 'B';
+                    tablero[coordLett][coordNum + 2] = 'B';
+                    correct = true;
 
                 }
 
@@ -151,7 +150,7 @@ public class Barco {
 
     public static int translateCoorNum(String coord) {
         int aux = Character.getNumericValue(coord.charAt(1));
-       // int aux2= Integer.parseInt(String.valueOf(coord.charAt(1)));
+        // int aux2= Integer.parseInt(String.valueOf(coord.charAt(1)));
         return aux;
     }
 

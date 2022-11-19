@@ -44,7 +44,7 @@ public class Input {
        Scanner sc = new Scanner(System.in);
        System.out.println(message);
 
-        return sc.nextLine().charAt(0);
+        return sc.nextLine().toUpperCase().charAt(0);
 
 
    }

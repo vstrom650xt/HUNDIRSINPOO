@@ -9,6 +9,7 @@ public class Jugador {
         String coord = "";
         char orientation;
         boolean putIt = false;
+
         //condicional si el barco es mayor que 1 pedir orien sino no jugar con la i
         //juego con el numero de barcos
         for (int i = 0; i < barcosJugador.length; i++) {
@@ -22,6 +23,8 @@ public class Jugador {
                         coordNum = Character.getNumericValue(coord.charAt(1));
                         tablero[coordLett][coordNum] = 'B';
                         barcosJugador[i][j]--;
+                        tools.Screen.show(tablero);
+
                     }
 
                 } else if (i == 1 && j == 1) {
