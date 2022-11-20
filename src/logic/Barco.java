@@ -56,7 +56,7 @@ public class Barco {
         if (sizeShip == 2) {
             if (orientation == 'V') {
                 if (coordNumb + 1 >= 10) {
-                    System.out.println("te sales del tablero");
+    //                System.out.println("te sales del tablero");
                 } else {
                     tablero[coordNumb][coordLett] = 'B';
                     tablero[coordNumb + 1][coordLett] = 'B';
@@ -64,7 +64,7 @@ public class Barco {
                 }
             } else if (orientation == 'H') {
                 if (coordLett + 1 >= 10) {
-                    System.out.println("te sales del tablero");
+       //             System.out.println("te sales del tablero");
                 } else {
                     tablero[coordNumb][coordLett] = 'B';
                     tablero[coordNumb][coordLett + 1] = 'B';
@@ -76,7 +76,7 @@ public class Barco {
         } else if (sizeShip == 3) {
             if (orientation == 'V') {
                 if (coordNumb + 1 >= 10) {
-                    System.out.println("te sales del tablero");
+            //        System.out.println("te sales del tablero");
                 } else {
                     tablero[coordNumb][coordLett] = 'B';
                     tablero[coordNumb + 1][coordLett] = 'B';
@@ -86,7 +86,6 @@ public class Barco {
 
             } else if (orientation == 'H') {
                 if (coordLett + 1 >= 10) {
-                    System.out.println("te sales del tablero");
                 } else {
                     tablero[coordNumb][coordLett] = 'B';
                     tablero[coordNumb][coordLett + 1] = 'B';
@@ -97,47 +96,40 @@ public class Barco {
 
             }
 
+            if (correct==false){
+                System.out.println("te sales del tablero");
+
+
+            }
+
         }
         return correct;
 
     }
 
 
-    public static boolean isBigShip(int coordNumb, int coordLett, char[][] tablero, int size, char orientation) {
+    public static boolean isBigShip(int coordNumb, int coordLett, char[][] tablero,  char orientation) {
         boolean its = false;
-        if (size == 2) {
-            if (orientation=='V'){
-                //esquina arriba derecha
+        boolean its2 = false;
+        boolean allOk = false;
+
+//
+//        if (orientation =='V'){
+//
+//            //este si q va //me comprueba hacia abajo  y a los lados // pero no arriba
+//            its2=isBot(coordNumb,coordLett,tablero);
+//            its=isTop(coordNumb+1,coordLett,tablero);
+//
+//
+//
+//        }else if (orientation =='H'){
+//
+//
+//        }
 
 
 
-                    //esquina abajo derecha
-
-
-
-            } else if (orientation=='H') {
-
-            }
-
-
-        } else if (size == 3) {
-            if (orientation == 'V') {
-                if (tablero[coordLett][coordNumb] == 'B' || tablero[coordLett + 1][coordNumb] == 'B' || tablero[coordLett + 2][coordNumb] == 'B') {
-                    System.out.println("ya hay un barco");
-
-                    its = true;
-                }
-            } else if (orientation == 'H') {
-                if (tablero[coordLett][coordNumb] == 'B' || tablero[coordLett][coordNumb + 1] == 'B' || tablero[coordLett][coordNumb + 2] == 'B') {
-                    System.out.println("ya hay un barco");
-
-                    its = true;
-                }
-
-            }
-
-        }
-        return !its;
+        return allOk;
     }
 
     public static boolean isShip(int coordNumb, int coordLett, char[][] tablero) {
@@ -178,7 +170,7 @@ public class Barco {
 
 
     //centro para doble barco
-    private static boolean topBot(int coordNumb, int coordLett, char[][] tablero) {
+    public static boolean topBot(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
 
       if (isTop(coordNumb,coordLett,tablero)){
@@ -187,7 +179,7 @@ public class Barco {
       }
         return its;
     }
-    private static boolean cornBotRight(int coordNumb, int coordLett, char[][] tablero) {
+    public static boolean cornBotRight(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
 
         if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb - 1][coordLett] == 'B' || tablero[coordNumb][coordLett + 1] == 'B') {
@@ -197,7 +189,7 @@ public class Barco {
         return its;
     }
 
-    private static boolean cornTopLeft(int coordNumb, int coordLett, char[][] tablero) {
+    public static boolean cornTopLeft(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
 
         if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb - 1][coordLett] == 'B' || tablero[coordNumb][coordLett + 1] == 'B') {
@@ -207,7 +199,7 @@ public class Barco {
         return its;
     }
 
-    private static boolean cornBotLeft(int coordNumb, int coordLett, char[][] tablero) {
+    public static boolean cornBotLeft(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
 
         if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb - 1][coordLett] == 'B' || tablero[coordNumb][coordLett - 1] == 'B') {
@@ -217,7 +209,7 @@ public class Barco {
         return its;
     }
 
-    private static boolean cornTopRight(int coordNumb, int coordLett, char[][] tablero) {
+    public static boolean cornTopRight(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
 
         if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb + 1][coordLett] == 'B' || tablero[coordNumb][coordLett - 1] == 'B') {
@@ -227,7 +219,7 @@ public class Barco {
         return its;
     }
 
-    private static boolean isTop(int coordNumb, int coordLett, char[][] tablero) {
+    public static boolean isTop(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
 
         if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb + 1][coordLett] == 'B' || tablero[coordNumb][coordLett + 1] == 'B' || tablero[coordNumb][coordLett - 1] == 'B') {
@@ -237,7 +229,7 @@ public class Barco {
         return its;
     }
 
-    private static boolean isRight(int coordNumb, int coordLett, char[][] tablero) {
+    public static boolean isRight(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
 
         if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb + 1][coordLett] == 'B' || tablero[coordNumb - 1][coordLett] == 'B' || tablero[coordNumb][coordLett - 1] == 'B') {
@@ -247,7 +239,7 @@ public class Barco {
         return its;
     }
 
-    private static boolean isBot(int coordNumb, int coordLett, char[][] tablero) {
+    public static boolean isBot(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
 
         if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb - 1][coordLett] == 'B' || tablero[coordNumb][coordLett - 1] == 'B' || tablero[coordNumb][coordLett + 1] == 'B') {
@@ -257,7 +249,7 @@ public class Barco {
         return its;
     }
 
-    private static boolean isLeft(int coordNumb, int coordLett, char[][] tablero) {
+    public static boolean isLeft(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
         if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb + 1][coordLett] == 'B' || tablero[coordNumb - 1][coordLett] == 'B' || tablero[coordNumb][coordLett + 1] == 'B') {
             System.out.println("ya hay un barco o hay uno muy cerca");
@@ -265,8 +257,8 @@ public class Barco {
         }
         return its;
     }
-
-    private static boolean inCenter(int coordNumb, int coordLett, char[][] tablero) {
+//REVISAR
+    public static boolean inCenter(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
         if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb + 1][coordLett] == 'B' || tablero[coordNumb - 1][coordLett] == 'B' || tablero[coordNumb][coordLett + 1] == 'B' || tablero[coordNumb][coordLett - 1] == 'B') {
             System.out.println("ya hay un barco o hay uno muy cerca");
@@ -338,6 +330,7 @@ public class Barco {
         int i = 1;
         boolean correct = false;
         int aux = Character.getNumericValue(coord.charAt(0));
+
         if (aux == 0) correct = false;
 
         do {
@@ -359,6 +352,27 @@ public class Barco {
         return correct;
 
     }
+
+    public static int totalVidas(int[][]barcos) {
+        int total =0;
+        int vidas1 = 1 ;
+
+        for (int i = 0; i < barcos.length; i++) {
+            for (int j = 0; j < barcos[i].length; j++) {
+                if (i ==1){
+                    total+= barcos[i][j]*vidas1;
+                    vidas1++;
+
+                }
+
+            }
+
+        }
+        return  total;
+
+    }
+
+
 
 
 }

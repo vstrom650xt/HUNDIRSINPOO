@@ -48,3 +48,50 @@
         }
         return !its;
     }
+
+
+
+
+
+
+
+
+    //////////////
+
+
+        public static boolean isBigShip(int coordNumb, int coordLett, char[][] tablero, int size, char orientation) {
+            boolean its = false;
+            if (size == 2) {
+                if (orientation=='V'){
+                    //esquina arriba derecha
+
+
+
+                        //esquina abajo derecha
+
+
+
+                } else if (orientation=='H') {
+
+                }
+
+
+            } else if (size == 3) {
+                if (orientation == 'V') {
+                    if (tablero[coordLett][coordNumb] == 'B' || tablero[coordLett + 1][coordNumb] == 'B' || tablero[coordLett + 2][coordNumb] == 'B') {
+                        System.out.println("ya hay un barco");
+
+                        its = true;
+                    }
+                } else if (orientation == 'H') {
+                    if (tablero[coordLett][coordNumb] == 'B' || tablero[coordLett][coordNumb + 1] == 'B' || tablero[coordLett][coordNumb + 2] == 'B') {
+                        System.out.println("ya hay un barco");
+
+                        its = true;
+                    }
+
+                }
+
+            }
+            return !its;
+        }

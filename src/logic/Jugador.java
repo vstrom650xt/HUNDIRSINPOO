@@ -19,7 +19,7 @@ public class Jugador {
                 coordLett = Character.getNumericValue(coord.charAt(1));
                 if (!isShip(coordNum,coordLett , tablero)) {
                     tablero[coordNum][coordLett] = 'B';
-                    barcosJugador[1][0]--;
+              //      barcosJugador[1][0]--;
                     putIt = true;
                 }
 
@@ -37,14 +37,15 @@ public class Jugador {
                 coordNum = Character.getNumericValue(coord.charAt(0));
                 coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Barco.getOrientation(barcosJugador);
-                if (!isBigShip(coordNum,coordLett , tablero, 2, orientation)) {
+                if (!isBigShip(coordNum,coordLett , tablero,  orientation)) {
                     putIt = drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 2);
                 }
 
 
+
             } while (!putIt);
             tools.Screen.show(tablero);
-            barcosJugador[1][1]--;
+   //         barcosJugador[1][1]--;
         }
 
 
@@ -57,15 +58,41 @@ public class Jugador {
 
                 coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Barco.getOrientation(barcosJugador);
-                if (!isBigShip(coordNum, coordLett, tablero, 3, orientation)) {
+                if (!isBigShip(coordNum, coordLett, tablero,  orientation)) {
                     putIt = drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 3);
                 }
             } while (!putIt);
             tools.Screen.show(tablero);
 
-            barcosJugador[1][2]--;
+    //        barcosJugador[1][2]--;
 
         }
+
+
+    }
+
+
+    public static  char[][]  shootPlayer(char[][] tableroDisparos,char[][] tableroEnemigo,int vidasPc){
+        String coordShoot;
+        int coordNum,coordLett;
+
+        System.out.println("pon cord disparo");
+
+        coordShoot=getCoordinate();
+        coordNum = Character.getNumericValue(coordShoot.charAt(0));
+        coordLett = Character.getNumericValue(coordShoot.charAt(1));
+        if (tableroEnemigo[coordNum][coordLett] == 'B'){
+            System.out.println("tocado");
+            tableroEnemigo[coordNum][coordLett] = 'X';
+            tableroDisparos[coordNum][coordLett] = 'X';
+            vidasPc--;
+            System.out.println("al enemigo le quedan " + vidasPc);
+
+        }else {
+            System.out.println("agua");
+        }
+
+        return tableroDisparos;
 
 
     }

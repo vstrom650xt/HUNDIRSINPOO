@@ -2,6 +2,15 @@ package logic;
 
 public class Tablero {
 
+    public static void verTodosTab(char[][] tablero, char[][] tableroDisparos,char[][] tableroEnemy,char[][] tableroDisparoEnemy) {
+        System.out.println("tablero Enemigo \t\t\ttablero disparos enemigo");
+        verTab(tableroEnemy,tableroDisparoEnemy);
+        System.out.println();
+        System.out.println("tablero \t\t\t\t\ttablero disparos");
+        verTab(tablero,tableroDisparos);
+
+
+    }
 
     public static void verTab(char[][] tablero, char[][] tableroEnemy) {
 
@@ -18,6 +27,7 @@ public class Tablero {
             }
 
         }
+        System.out.println();
 
     }
 
