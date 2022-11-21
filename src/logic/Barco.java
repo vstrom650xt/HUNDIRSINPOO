@@ -117,10 +117,60 @@ public class Barco {
                 if (coordNumb+1 >= 10){
                     System.out.println("te sales del tab");
                 }else {
-                    its = isBot(coordNumb, coordLett, tablero);
-                    its2 = isTop(coordNumb + 1, coordLett, tablero);
-                    if (its || its2)
-                        todo = true;
+                    //esquina arriba derecha
+                    if (coordNumb == 1 && coordLett == 9) {
+                        its = cornTopRight(coordNumb, coordLett, tablero);
+                        its2 = cornTopRight(coordNumb+1, coordLett, tablero);
+                        if (its || its2)
+                            todo = true;
+                        //esquina abajo derecha
+                    }else if (coordNumb == 9 && coordLett == 9){
+                        System.out.println("no cabe");
+                        todo=false;
+
+                    }else if (coordNumb == 1 && coordLett == 1) {
+                        its = cornTopLeft(coordNumb, coordLett, tablero);                        its = cornTopLeft(coordNumb, coordLett, tablero);
+                        its = cornTopLeft(coordNumb+1, coordLett, tablero);
+                        if (its || its2)
+                            todo = true;
+
+                        //esquina abajo izquierda
+                    } else if (coordNumb == 9 && coordLett == 1) {
+                        System.out.println("no cabe");
+                        todo=false;
+
+                        //comprobar  arriba
+                    } else if (coordNumb == 1) {
+                        its = isTop(coordNumb, coordLett, tablero);
+                        its = isTop(coordNumb, coordLett, tablero);
+
+                        //comprobar derecha
+                    } else if (coordLett == 9) {
+                        its = isRight(coordNumb, coordLett, tablero);
+                        its = isRight(coordNumb, coordLett, tablero);
+
+                        //comprobar abajo
+                    } else if (coordNumb == 9) {
+                        its = isBot(coordNumb, coordLett, tablero);
+                        its = isBot(coordNumb, coordLett, tablero);
+
+                        //comrpobar izquierda
+                    } else if (coordLett == 1) {
+                        its = isLeft(coordNumb, coordLett, tablero);
+                        its = isLeft(coordNumb, coordLett, tablero);
+
+                        //centro
+                    } else {
+                        its = inCenter(coordNumb, coordLett, tablero);
+                        its = inCenter(coordNumb, coordLett, tablero);
+
+                    }
+
+//                    its = isBot(coordNumb, coordLett, tablero);
+//                    its2 = isTop(coordNumb + 1, coordLett, tablero);
+//
+//
+
                 }
             } else if (orientation == 'H') {
                 if (coordLett+1 >= 10){
