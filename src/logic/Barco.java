@@ -50,7 +50,7 @@ public class Barco {
         return decision;
     }
 
-    public static void drawShip(int coordNumb, int coordLett, char orientation, char[][] tablero, int[][] barcosJugador, int sizeShip) {
+    public static boolean drawShip(int coordNumb, int coordLett, char orientation, char[][] tablero, int[][] barcosJugador, int sizeShip) {
         boolean correct = false;
         //juego con las vidas de los barcos
         if (sizeShip == 2) {
@@ -96,13 +96,14 @@ public class Barco {
 
             }
 
-            if (correct == false) {
+            if (!correct) {
                 System.out.println("te sales del tablero");
 
             }
 
         }
 
+        return correct;
     }
 
 
@@ -113,47 +114,67 @@ public class Barco {
 
         if (size == 2) {
             if (orientation == 'V') {
-                its = isBot(coordNumb, coordLett, tablero);
-                its2 = isTop(coordNumb + 1, coordLett, tablero);
-
-                if (its || its2)
-                    todo = true;
-
-
+                if (coordNumb+1 >= 10){
+                    System.out.println("te sales del tab");
+                }else {
+                    its = isBot(coordNumb, coordLett, tablero);
+                    its2 = isTop(coordNumb + 1, coordLett, tablero);
+                    if (its || its2)
+                        todo = true;
+                }
             } else if (orientation == 'H') {
-                its = isRight(coordNumb, coordLett, tablero);
-                its2 = isLeft(coordNumb, coordLett + 1, tablero);
-
-                if (its || its2)
-                    todo = true;
-
-
+                if (coordLett+1 >= 10){
+                    System.out.println("te sales del tab");
+                }else{
+                    its = isRight(coordNumb, coordLett, tablero);
+                    its2 = isLeft(coordNumb, coordLett + 1, tablero);
+                    if (its || its2)
+                        todo = true;
+                }
             }
         } else if (size == 3) {
+             if (orientation == 'V') {
+                 if (coordNumb+1 >= 10 && coordNumb+2 >= 10 ){
+                     System.out.println("te sales del tab");
+                 }else if (coordLett == 1){
 
-//            if (orientation == 'V') {
-//                its = isBot(coordNumb, coordLett, tablero);
-//                its3 =inMidV(coordNumb + 1, coordLett, tablero);
-//                its2 = isTop(coordNumb +2, coordLett, tablero);
-//
-//                if (its || its2 || its3)
-//                    todo = true;
-//
-//
-//            } else if (orientation == 'H') {
-//                its = isRight(coordNumb, coordLett, tablero);
-//                its3=inMidH(coordNumb, coordLett + 1, tablero);
-//                its2 = isLeft(coordNumb, coordLett + 2, tablero);
-//
-//                if (its || its2|| its3)
-//                    todo = true;
-//
-//
-//            }
+                     its = isLeft(coordNumb, coordLett, tablero);
+                     its3 =isLeft(coordNumb+1, coordLett, tablero);
+                     its2 = isLeft(coordNumb +2, coordLett, tablero);
+                     if (its || its2 || its3)
+                         todo = true;
 
+
+                 }else if (coordLett == 9){
+                     its = isBot(coordNumb, coordLett, tablero);
+                     its3 =inMidV(coordNumb+1, coordLett, tablero);
+                     its2 = isTop(coordNumb +2, coordLett, tablero);
+                     if (its || its2 || its3)
+                         todo = true;
+                 }else {
+                     its = isBot(coordNumb, coordLett, tablero);
+                     its3 =inMidV(coordNumb+1, coordLett, tablero);
+                     its2 = isTop(coordNumb +2, coordLett, tablero);
+                     if (its || its2 || its3)
+                         todo = true;
+
+                 }
+
+            } else if (orientation == 'H') {
+                 if (coordLett+1 >=10 && coordLett+2 >=10){
+                     System.out.println("te sales del tab");
+
+                 }else {
+                     its = isRight(coordNumb, coordLett, tablero);
+                     its3=inMidH(coordNumb, coordLett + 1, tablero);
+                     its2 = isLeft(coordNumb, coordLett + 2, tablero);
+                     if (its || its2|| its3)
+                         todo = true;
+
+
+                 }
+            }
         }
-
-
         return todo;
     }
 
@@ -194,16 +215,26 @@ public class Barco {
     }
 
 
-    //centro para doble barco
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static boolean inMidV(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
 
-        if (isTop(coordNumb, coordLett, tablero)) {
             if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb][coordLett + 1] == 'B' || tablero[coordNumb][coordLett - 1] == 'B') {
                 System.out.println("ya hay un barco o hay uno muy cerca");
                 its = true;
-            }
+
             return its;
 
         }
@@ -213,11 +244,10 @@ public class Barco {
     public static boolean inMidH(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
 
-        if (isTop(coordNumb, coordLett, tablero)) {
             if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb+1][coordLett ] == 'B' || tablero[coordNumb-1][coordLett] == 'B') {
                 System.out.println("ya hay un barco o hay uno muy cerca");
                 its = true;
-            }
+
             return its;
 
         }

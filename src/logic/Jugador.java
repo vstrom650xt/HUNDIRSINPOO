@@ -38,38 +38,33 @@ public class Jugador {
                 coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Barco.getOrientation(barcosJugador);
                 if (!isBigShip(coordNum, coordLett, tablero, orientation,2)) {
-                    putIt = true;
-                    drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 2);
+                    putIt = drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 2);
 
                 }
-
-
             } while (!putIt);
             tools.Screen.show(tablero);
             //         barcosJugador[1][1]--;
         }
 
 
-//        for (int k = 0; k < vidas3; k++) {
-//            do {
-//                putIt = false;
-//                System.out.println("pon el " + (k + 1) + " barco de " + (barcosJugador[0][2]) + " vidas");
-//                coord = getCoordinate();
-//                coordNum = Character.getNumericValue(coord.charAt(0));
-//
-//                coordLett = Character.getNumericValue(coord.charAt(1));
-//                orientation = Barco.getOrientation(barcosJugador);
-//                if (!isBigShip(coordNum, coordLett, tablero, orientation,3)) {
-//
-//                    putIt = true;
-//                            drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 3);
-//                }
-//            } while (!putIt);
-//            tools.Screen.show(tablero);
-//
-//            //        barcosJugador[1][2]--;
-//
-//        }
+        for (int k = 0; k < vidas3; k++) {
+            do {
+                putIt = false;
+                System.out.println("pon el " + (k + 1) + " barco de " + (barcosJugador[0][2]) + " vidas");
+                coord = getCoordinate();
+                coordNum = Character.getNumericValue(coord.charAt(0));
+                coordLett = Character.getNumericValue(coord.charAt(1));
+                orientation = Barco.getOrientation(barcosJugador);
+                if (!isBigShip(coordNum, coordLett, tablero, orientation,3)) {
+
+                    putIt = drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 3);
+                }
+            } while (!putIt);
+            tools.Screen.show(tablero);
+
+            //        barcosJugador[1][2]--;
+
+        }
 
 
     }
@@ -78,9 +73,7 @@ public class Jugador {
     public static char[][] shootPlayer(char[][] tableroDisparos, char[][] tableroEnemigo, int vidasPc) {
         String coordShoot;
         int coordNum, coordLett;
-
         System.out.println("pon cord disparo");
-
         coordShoot = getCoordinate();
         coordNum = Character.getNumericValue(coordShoot.charAt(0));
         coordLett = Character.getNumericValue(coordShoot.charAt(1));

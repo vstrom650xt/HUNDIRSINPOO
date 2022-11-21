@@ -27,12 +27,12 @@ public class Juego {
         barcosEnemigo = Pc.copyArry(barcosJugador);
         Jugador.putShip(tableroPlayer, barcosJugador);
         Pc.putPcShip(tableroEnemy, barcosEnemigo);
-        System.out.println();
-        System.out.println();
-        Tablero.verTodosTab(tableroPlayer, tableroShootPlayer, tableroEnemy, tableroShootEnemy);
-        System.out.println();
-        System.out.println();
-        Juego.shoots(vidasJugador,vidasEnemigo);
+//        System.out.println();
+//        System.out.println();
+//        Tablero.verTodosTab(tableroPlayer, tableroShootPlayer, tableroEnemy, tableroShootEnemy);
+//        System.out.println();
+//        System.out.println();
+//        Juego.shoots(vidasJugador,vidasEnemigo);
     }
 
     public static void shoots(int vidasJugador, int totalVidasPc) {
