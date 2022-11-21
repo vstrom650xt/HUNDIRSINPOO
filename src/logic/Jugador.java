@@ -17,9 +17,9 @@ public class Jugador {
                 coord = getCoordinate();
                 coordNum = Character.getNumericValue(coord.charAt(0));
                 coordLett = Character.getNumericValue(coord.charAt(1));
-                if (!isShip(coordNum,coordLett , tablero)) {
+                if (!isShip(coordNum, coordLett, tablero)) {
                     tablero[coordNum][coordLett] = 'B';
-              //      barcosJugador[1][0]--;
+                    //      barcosJugador[1][0]--;
                     putIt = true;
                 }
 
@@ -37,58 +37,61 @@ public class Jugador {
                 coordNum = Character.getNumericValue(coord.charAt(0));
                 coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Barco.getOrientation(barcosJugador);
-                if (!isBigShip(coordNum,coordLett , tablero,  orientation)) {
-                    putIt = drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 2);
-                }
+                if (!isBigShip(coordNum, coordLett, tablero, orientation,2)) {
+                    putIt = true;
+                    drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 2);
 
+                }
 
 
             } while (!putIt);
             tools.Screen.show(tablero);
-   //         barcosJugador[1][1]--;
+            //         barcosJugador[1][1]--;
         }
 
 
-        for (int k = 0; k < vidas3; k++) {
-            do {
-                putIt = false;
-                System.out.println("pon el " + (k + 1) + " barco de " + (barcosJugador[0][2]) + " vidas");
-                coord = getCoordinate();
-                coordNum = Character.getNumericValue(coord.charAt(0));
-
-                coordLett = Character.getNumericValue(coord.charAt(1));
-                orientation = Barco.getOrientation(barcosJugador);
-                if (!isBigShip(coordNum, coordLett, tablero,  orientation)) {
-                    putIt = drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 3);
-                }
-            } while (!putIt);
-            tools.Screen.show(tablero);
-
-    //        barcosJugador[1][2]--;
-
-        }
+//        for (int k = 0; k < vidas3; k++) {
+//            do {
+//                putIt = false;
+//                System.out.println("pon el " + (k + 1) + " barco de " + (barcosJugador[0][2]) + " vidas");
+//                coord = getCoordinate();
+//                coordNum = Character.getNumericValue(coord.charAt(0));
+//
+//                coordLett = Character.getNumericValue(coord.charAt(1));
+//                orientation = Barco.getOrientation(barcosJugador);
+//                if (!isBigShip(coordNum, coordLett, tablero, orientation,3)) {
+//
+//                    putIt = true;
+//                            drawShip(coordNum, coordLett, orientation, tablero, barcosJugador, 3);
+//                }
+//            } while (!putIt);
+//            tools.Screen.show(tablero);
+//
+//            //        barcosJugador[1][2]--;
+//
+//        }
 
 
     }
 
 
-    public static  char[][]  shootPlayer(char[][] tableroDisparos,char[][] tableroEnemigo,int vidasPc){
+    public static char[][] shootPlayer(char[][] tableroDisparos, char[][] tableroEnemigo, int vidasPc) {
         String coordShoot;
-        int coordNum,coordLett;
+        int coordNum, coordLett;
 
         System.out.println("pon cord disparo");
 
-        coordShoot=getCoordinate();
+        coordShoot = getCoordinate();
         coordNum = Character.getNumericValue(coordShoot.charAt(0));
         coordLett = Character.getNumericValue(coordShoot.charAt(1));
-        if (tableroEnemigo[coordNum][coordLett] == 'B'){
+        if (tableroEnemigo[coordNum][coordLett] == 'B') {
             System.out.println("tocado");
             tableroEnemigo[coordNum][coordLett] = 'X';
             tableroDisparos[coordNum][coordLett] = 'X';
             vidasPc--;
             System.out.println("al enemigo le quedan " + vidasPc);
 
-        }else {
+        } else {
             System.out.println("agua");
         }
 

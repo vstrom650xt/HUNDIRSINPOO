@@ -67,15 +67,16 @@ public class Pc {
                 coordNum = Character.getNumericValue(coord.charAt(0));
                 coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Pc.randOrien();
-                if (!isBigShip(coordNum, coordLett, tableroPc, orientation)) {
-                    putIt = drawShip(coordNum, coordLett, orientation, tableroPc, barcosPC, 2);
+                if (!isBigShip(coordNum, coordLett, tableroPc, orientation,2)) {
+                    putIt = true;
+                    drawShip(coordNum, coordLett, orientation, tableroPc, barcosPC, 2);
                 }
 
 
             } while (!putIt);
             //         tools.Screen.show(tableroPc);
 
-            barcosPC[1][1]--;
+            //   barcosPC[1][1]--;
         }
 
 
@@ -85,9 +86,10 @@ public class Pc {
 //                coord = randomCoordinate();
 //                coordNum = Character.getNumericValue(coord.charAt(0));
 //                coordLett = Character.getNumericValue(coord.charAt(1));
-//                orientation =Pc.randOrien();
-//                if (!isBigShip(coordNum, coordLett, tableroPc, orientation)) {
-//                    putIt = drawShip(coordNum, coordLett, orientation, tableroPc, barcosPC, 3);
+//                orientation = Pc.randOrien();
+//                if (!isBigShip(coordNum, coordLett, tableroPc, orientation,3)) {
+//                    putIt = true;
+//                    drawShip(coordNum, coordLett, orientation, tableroPc, barcosPC, 3);
 //                }
 //            } while (!putIt);
 //            tools.Screen.show(tableroPc);
@@ -113,7 +115,7 @@ public class Pc {
     }
 
 
-    public static void shootPc(char[][] tableroDisparosPc, char[][] tableroJugador,  int vidasJugador ) {
+    public static void shootPc(char[][] tableroDisparosPc, char[][] tableroJugador, int vidasJugador) {
         String coordShoot;
         int coordNum, coordLett;
 
@@ -131,7 +133,6 @@ public class Pc {
         } else {
             System.out.println("agua");
         }
-
 
 
     }

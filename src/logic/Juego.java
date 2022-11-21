@@ -14,7 +14,7 @@ public class Juego {
 
     public static void comenzar(){
 
-        int vidasJugador =0;
+        int vidasJugador =0,vidasEnemigo=0;
          //int vidasJugador = Barco.totalVidas(barcosJugador);
         //vidasJugador = Barco.totalVidas(barcosJugador)
 
@@ -23,6 +23,7 @@ public class Juego {
         System.out.println();
         barcosJugador = Barco.crearBarcos();
         vidasJugador = Barco.totalVidas(barcosJugador);
+        vidasEnemigo= vidasJugador;
         barcosEnemigo = Pc.copyArry(barcosJugador);
         Jugador.putShip(tableroPlayer, barcosJugador);
         Pc.putPcShip(tableroEnemy, barcosEnemigo);
@@ -31,7 +32,7 @@ public class Juego {
         Tablero.verTodosTab(tableroPlayer, tableroShootPlayer, tableroEnemy, tableroShootEnemy);
         System.out.println();
         System.out.println();
-        Juego.shoots(vidasJugador,vidasJugador);
+        Juego.shoots(vidasJugador,vidasEnemigo);
     }
 
     public static void shoots(int vidasJugador, int totalVidasPc) {
