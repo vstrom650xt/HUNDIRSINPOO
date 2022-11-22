@@ -47,7 +47,7 @@ public class Pc {
                 coord = randomCoordinate();
                 coordNum = Character.getNumericValue(coord.charAt(0));
                 coordLett = Character.getNumericValue(coord.charAt(1));
-                     System.out.println(coordNum + "" + coordLett);
+                     System.out.println(coordNum + "" + coordLett );
                 if (!isShip(coordNum, coordLett, tableroPc)) {
                     tableroPc[coordNum][coordLett] = 'B';
                     barcosPC[1][0]--;
@@ -67,7 +67,7 @@ public class Pc {
                 coordNum = Character.getNumericValue(coord.charAt(0));
                 coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Pc.randOrien();
-                System.out.println(coordNum+" "+coordLett );
+                System.out.println(coordNum+" "+coordLett + " " + orientation);
                 if (!isBigShip(coordNum, coordLett, tableroPc, orientation,2)) {
                     putIt = drawShip(coordNum, coordLett, orientation, tableroPc, barcosPC, 2);
                 }
@@ -88,7 +88,8 @@ public class Pc {
                 coordNum = Character.getNumericValue(coord.charAt(0));
                 coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Pc.randOrien();
-                System.out.println(coordNum+" "+coordLett );
+                System.out.println(coordNum+" "+coordLett +"" + orientation
+                );
                 if (!isBigShip(coordNum, coordLett, tableroPc, orientation,3)) {
                     putIt =drawShip(coordNum, coordLett, orientation, tableroPc, barcosPC, 3);
                 }
