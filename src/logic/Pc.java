@@ -134,6 +134,8 @@ public class Pc {
 
         } else {
             System.out.println("agua");
+            tableroDisparosPc[coordNum][coordLett] = 'A';
+
         }
 
 

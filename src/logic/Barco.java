@@ -15,8 +15,8 @@ public class Barco {
                 arrBarc[0][j] = 1 + i++;
                 //  System.out.println("[*]introduce el numero de barcos de " + i + " vida/s");
                 arrBarc[1][j] = Input.getInteger("[*]introduce el numero de barcos de " + i + " vida/s");
-                while (arrBarc[1][j] > 4 || arrBarc[1][j] <= 0) {
-                    System.out.println("no puedes tener mas de 4 barcos de cada tipo ni ir sin barcos!");
+                while (arrBarc[1][j] > 3 || arrBarc[1][j] <= 0) {
+                    System.out.println("no puedes tener mas de 3 barcos de cada tipo ni ir sin barcos!");
                     arrBarc[1][j] = sc.nextInt();
                 }
             }
@@ -148,7 +148,7 @@ public class Barco {
                             todo = true;
                     } else if (coordNumb==8 && coordLett==9) {
                         its = isRight(coordNumb, coordLett, tablero);
-                        its2 = isTop(coordNumb + 1, coordLett, tablero);
+                        its2 = cornBotLeft(coordNumb + 1, coordLett, tablero);
                         if (its || its2)
                             todo = true;
 

@@ -265,3 +265,18 @@
         }
         return todo;
     }
+
+
+
+
+
+
+    public static boolean isBot(int coordNumb, int coordLett, char[][] tablero) {
+        boolean its = false;
+
+        if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb - 1][coordLett] == 'B' || tablero[coordNumb][coordLett - 1] == 'B' || tablero[coordNumb][coordLett + 1] == 'B') {
+            System.out.println("ya hay un barco o hay uno muy cerca");
+            its = true;
+        }
+        return its;
+    }

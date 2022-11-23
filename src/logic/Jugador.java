@@ -86,6 +86,8 @@ public class Jugador {
 
         } else {
             System.out.println("agua");
+            tableroDisparos[coordNum][coordLett] = 'A';
+
         }
 
         return tableroDisparos;
