@@ -25,11 +25,11 @@ public class Juego {
         vidasJugador = Barco.totalVidas(barcosJugador);
         vidasEnemigo= vidasJugador;
         barcosEnemigo = Pc.copyArry(barcosJugador);
-//        Jugador.putShip(tableroPlayer, barcosJugador);
+//       Jugador.putShip(tableroPlayer, barcosJugador);
         Pc.putPcShip(tableroEnemy, barcosEnemigo);
 //        System.out.println();
 //        System.out.println();
-//        Tablero.verTodosTab(tableroPlayer, tableroShootPlayer, tableroEnemy, tableroShootEnemy);
+        Tablero.verTodosTab(tableroPlayer, tableroShootPlayer, tableroEnemy, tableroShootEnemy);
 //        System.out.println();
 //        System.out.println();
 //        Juego.shoots(vidasJugador,vidasEnemigo);
