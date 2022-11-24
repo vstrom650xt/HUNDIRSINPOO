@@ -70,9 +70,10 @@ public class Jugador {
     }
 
 
-    public static char[][] shootPlayer(char[][] tableroDisparos, char[][] tableroEnemigo, int vidasPc) {
+    public static boolean shootPlayer(char[][] tableroDisparos, char[][] tableroEnemigo, int vidasPc) {
         String coordShoot;
         int coordNum, coordLett;
+        boolean acierto = false;
         System.out.println("pon cord disparo");
         coordShoot = getCoordinate();
         coordNum = Character.getNumericValue(coordShoot.charAt(0));
@@ -81,7 +82,8 @@ public class Jugador {
             System.out.println("tocado");
             tableroEnemigo[coordNum][coordLett] = 'X';
             tableroDisparos[coordNum][coordLett] = 'X';
-            vidasPc--;
+         //   vidasPc--;
+            acierto= true;
             System.out.println("al enemigo le quedan " + vidasPc);
 
         } else {
@@ -89,10 +91,7 @@ public class Jugador {
             tableroDisparos[coordNum][coordLett] = 'A';
 
         }
-
-        return tableroDisparos;
-
-
+        return acierto;
     }
 
 }

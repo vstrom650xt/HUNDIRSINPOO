@@ -25,28 +25,36 @@ public class Juego {
         vidasJugador = Barco.totalVidas(barcosJugador);
         vidasEnemigo= vidasJugador;
         barcosEnemigo = Pc.copyArry(barcosJugador);
-   //   Jugador.putShip(tableroPlayer, barcosJugador);
+        Jugador.putShip(tableroPlayer, barcosJugador);
 
-       Pc.putPcShip(tableroEnemy, barcosEnemigo);
-//        System.out.println();
-//        System.out.println();
-//        Tablero.verTodosTab(tableroPlayer, tableroShootPlayer, tableroEnemy, tableroShootEnemy);
-//        System.out.println();
-//        System.out.println();
-//        Juego.shoots(vidasJugador,vidasEnemigo);
+        Pc.putPcShip(tableroEnemy, barcosEnemigo);
+        System.out.println();
+        System.out.println();
+        Tablero.verTodosTab(tableroPlayer, tableroShootPlayer, tableroEnemy, tableroShootEnemy);
+        System.out.println();
+        System.out.println();
+        Juego.shoots(vidasJugador,vidasEnemigo);
     }
 
     public static void shoots(int vidasJugador, int totalVidasPc) {
 
         do {
             System.out.println("tu turno");
-            Jugador.shootPlayer(tableroShootPlayer,tableroEnemy,totalVidasPc);
+//            Jugador.shootPlayer(tableroShootPlayer,tableroEnemy,totalVidasPc);
+            if(Jugador.shootPlayer(tableroShootPlayer, tableroEnemy, totalVidasPc)){
+                totalVidasPc--;
+
+            }
             Tablero.verTodosTab(tableroPlayer, tableroShootPlayer, tableroEnemy, tableroShootEnemy);
             System.out.println();
             System.out.println("-------------------------------------------------------------------------------");
 
             System.out.println();
-            Pc.shootPc(tableroShootEnemy,tableroPlayer,vidasJugador);
+            if (Pc.shootPc(tableroShootEnemy,tableroPlayer,vidasJugador)){
+                vidasJugador--;
+
+            }
+
             Tablero.verTodosTab(tableroPlayer, tableroShootPlayer, tableroEnemy, tableroShootEnemy);
 
         } while (vidasJugador != 0 && totalVidasPc != 0);

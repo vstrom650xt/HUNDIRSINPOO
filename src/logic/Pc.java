@@ -117,9 +117,10 @@ public class Pc {
     }
 
 
-    public static void shootPc(char[][] tableroDisparosPc, char[][] tableroJugador, int vidasJugador) {
+    public static  boolean shootPc(char[][] tableroDisparosPc, char[][] tableroJugador, int vidasJugador) {
         String coordShoot;
         int coordNum, coordLett;
+        boolean acierto = false;
 
         coordShoot = randomCoordinate();
         coordNum = Character.getNumericValue(coordShoot.charAt(0));
@@ -128,7 +129,9 @@ public class Pc {
             System.out.println("tocado");
             tableroJugador[coordNum][coordLett] = 'X';
             tableroDisparosPc[coordNum][coordLett] = 'X';
-            vidasJugador--;
+         //   vidasJugador--;
+            acierto = true;
+
             System.out.println("te quedan " + vidasJugador);
 
 
@@ -137,9 +140,16 @@ public class Pc {
             tableroDisparosPc[coordNum][coordLett] = 'A';
 
         }
-
+        return  acierto;
 
     }
+
+//    public static int acierto(int ){
+//
+//
+//
+//        return
+//    }
 
 
 }
