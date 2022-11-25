@@ -20,15 +20,6 @@ public class Input {
         return sc.nextInt();
     }
 
-    public static int getIntegerSmaller(String message) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println(message);
-        while (!sc.hasNextInt()) {
-            System.out.println("Error. You have to enter a integer number.");
-            sc.next();
-        }
-        return sc.nextInt();
-    }
 
     public static float getFloat(String message) {
         Scanner sc = new Scanner(System.in);

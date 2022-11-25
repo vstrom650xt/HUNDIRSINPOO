@@ -1,14 +1,21 @@
 package logic;
 
-import static logic.Barco.*;
+import static logic.Ship.*;
 
+/**
+ * this class let the Pcs hoot anf put ships randomly
+ */
 public class Pc {
-
-    public static int[][] copyArry(int[][] barcosJugador) {
+    /**
+     * method that copy Players ships into Pc´s ships
+     * @param PlayerShips
+     * @return
+     */
+    public static int[][] copyArry(int[][] PlayerShips) {
         int[][] barcosPc = new int[2][3];
-        for (int i = 0; i < barcosJugador.length; i++) {
-            for (int j = 0; j < barcosJugador[i].length; j++) {
-                barcosPc[i][j] = barcosJugador[i][j];
+        for (int i = 0; i < PlayerShips.length; i++) {
+            for (int j = 0; j < PlayerShips[i].length; j++) {
+                barcosPc[i][j] = PlayerShips[i][j];
 
             }
 
@@ -18,6 +25,10 @@ public class Pc {
         return barcosPc;
     }
 
+    /**
+     * method that return a random orientation
+     * @return V OR H
+     */
 
     public static char randOrien() {
         int orient = (int) (Math.random() * (1 + 1) + 0);
@@ -34,80 +45,77 @@ public class Pc {
 
     }
 
-    public static void putPcShip(char[][] tableroPc, int[][] barcosPC) {
-        int coordLett = 0, coordNum = 0, vidas1 = barcosPC[1][0], vidas2 = barcosPC[1][1], vidas3 = barcosPC[1][2];
-        String coord = "";
+    /**
+     * method that put the Pc´s ship randomly
+     * @param boardPc
+     * @param shipsPc
+     */
+    public static void putPcShip(char[][] boardPc, int[][] shipsPc) {
+        int coordLett, coordNum , oneLife = shipsPc[1][0], twoLife = shipsPc[1][1], threeLife = shipsPc[1][2];
+        String coord ;
         char orientation;
         boolean putIt;
 
-        for (int k = 0; k < vidas1; k++) {
+        for (int k = 0; k < oneLife; k++) {
 
             do {
                 putIt = false;
                 coord = randomCoordinate();
                 coordNum = Character.getNumericValue(coord.charAt(0));
                 coordLett = Character.getNumericValue(coord.charAt(1));
-                System.out.println(coordNum + "" + coordLett);
-                if (!isShip(coordNum, coordLett, tableroPc)) {
-                    tableroPc[coordNum][coordLett] = 'B';
-                    barcosPC[1][0]--;
+                if (!isShip(coordNum, coordLett, boardPc)) {
+                    boardPc[coordNum][coordLett] = 'B';
+                    shipsPc[1][0]--;
                     putIt = true;
                 }
 
             } while (!putIt);
-            //  tools.Screen.show(tableroPc);
 
         }
 
 
-        for (int k = 0; k < vidas2; k++) {
+        for (int k = 0; k < twoLife; k++) {
             do {
                 putIt = false;
                 coord = randomCoordinate();
                 coordNum = Character.getNumericValue(coord.charAt(0));
                 coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Pc.randOrien();
-                System.out.println(coordNum + " " + coordLett + " " + orientation);
-                if (!isBigShip(coordNum, coordLett, tableroPc, orientation, 2)) {
-                    putIt = drawShip(coordNum, coordLett, orientation, tableroPc, barcosPC, 2);
+                if (!isBigShip(coordNum, coordLett, boardPc, orientation, 2)) {
+                    putIt = drawShip(coordNum, coordLett, orientation, boardPc, shipsPc, 2);
                 }
 
 
             } while (!putIt);
-            tools.Screen.show(tableroPc);
-            //         tools.Screen.show(tableroPc);
 
-            //   barcosPC[1][1]--;
         }
 
 
-        for (int k = 0; k < vidas3; k++) {
+        for (int k = 0; k < threeLife; k++) {
             do {
                 putIt = false;
                 coord = randomCoordinate();
                 coordNum = Character.getNumericValue(coord.charAt(0));
                 coordLett = Character.getNumericValue(coord.charAt(1));
                 orientation = Pc.randOrien();
-                System.out.println(coordNum + " " + coordLett + "" + orientation
-                );
-                if (!isBigShip(coordNum, coordLett, tableroPc, orientation, 3)) {
-                    putIt = drawShip(coordNum, coordLett, orientation, tableroPc, barcosPC, 3);
+                if (!isBigShip(coordNum, coordLett, boardPc, orientation, 3)) {
+                    putIt = drawShip(coordNum, coordLett, orientation, boardPc, shipsPc, 3);
                 }
             } while (!putIt);
-            tools.Screen.show(tableroPc);
 
-            //   barcosPC[1][2]--;
 
         }
 
 
     }
 
-
+    /**
+     *
+     *  @return a random coordinate between 11 and 99 without 0
+     */
     public static String randomCoordinate() {
         String coordinate = "20";
         do {
-            //      coordinate = String.valueOf((int) (Math.random() * (99 - 11 + 1) + 11));
             while (coordinate.charAt(1) == '0') {
                 coordinate = String.valueOf((int) (Math.random() * (99 - 11 + 1) + 11));
             }
@@ -117,39 +125,30 @@ public class Pc {
     }
 
 
-    public static  boolean shootPc(char[][] tableroDisparosPc, char[][] tableroJugador, int vidasJugador) {
+    public static boolean shootPc(char[][] tableroDisparosPc, char[][] tableroJugador, int vidasJugador) {
         String coordShoot;
         int coordNum, coordLett;
-        boolean acierto = false;
+        boolean hit = false;
 
         coordShoot = randomCoordinate();
         coordNum = Character.getNumericValue(coordShoot.charAt(0));
         coordLett = Character.getNumericValue(coordShoot.charAt(1));
         if (tableroJugador[coordNum][coordLett] == 'B') {
-            System.out.println("tocado");
+            System.out.println("Hit");
             tableroJugador[coordNum][coordLett] = 'X';
             tableroDisparosPc[coordNum][coordLett] = 'X';
-         //   vidasJugador--;
-            acierto = true;
-
-            System.out.println("te quedan " + vidasJugador);
+            hit = true;
+            System.out.println("you got " + vidasJugador + "life/s left");
 
 
         } else {
-            System.out.println("agua");
+            System.out.println("Water");
             tableroDisparosPc[coordNum][coordLett] = 'A';
 
         }
-        return  acierto;
+        return hit;
 
     }
-
-//    public static int acierto(int ){
-//
-//
-//
-//        return
-//    }
 
 
 }
