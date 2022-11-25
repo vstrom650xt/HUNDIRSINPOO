@@ -15,8 +15,8 @@ public class Barco {
                 arrBarc[0][j] = 1 + i++;
                 //  System.out.println("[*]introduce el numero de barcos de " + i + " vida/s");
                 arrBarc[1][j] = Input.getInteger("[*]introduce el numero de barcos de " + i + " vida/s");
-                while (arrBarc[1][j] > 3 || arrBarc[1][j] <= 0) {
-                    System.out.println("no puedes tener mas de 3 barcos de cada tipo ni ir sin barcos!");
+                while (arrBarc[1][j] > 4 || arrBarc[1][j] <= 0) {
+                    System.out.println("no puedes tener mas de 4 barcos de cada tipo ni ir sin barcos!");
                     arrBarc[1][j] = sc.nextInt();
                 }
             }
@@ -108,347 +108,361 @@ public class Barco {
 
 
     public static boolean isBigShip(int coordNumb, int coordLett, char[][] tablero, char orientation, int size) {
-        boolean its = false, its2 = false, its3 = false;
         boolean todo = false;
 
         if (size == 2) {
-            if (orientation == 'V') {
-                if (coordNumb + 1 >= 10) {
-                    System.out.println("te sales del tab");
-                    todo=false;
+            todo = twoLives(coordNumb, coordLett, tablero, orientation, todo);
+        } else if (size == 3) {
+            todo = threeLives(coordNumb, coordLett, tablero, orientation, todo);
+        }
+        return todo;
+    }
+
+    private static boolean threeLives(int coordNumb, int coordLett, char[][] tablero, char orientation, boolean todo) {
+        boolean its3;
+        boolean its;
+        boolean its2;
+        if (orientation == 'V') {
+            if (coordNumb + 1 >= 10) {
+                System.out.println("te sales del tab");
+            } else {
+                if (coordNumb == 1 && coordLett == 9) {
+                    its = cornTopRight(coordNumb, coordLett, tablero);
+                    its2 = isRight(coordNumb + 1, coordLett, tablero);
+                    its3 = isRight(coordNumb + 2, coordLett, tablero);
+                    if (its || its2 || its3)
+                        todo = true;
+                } else if (coordNumb == 1 && coordLett == 1) {
+                    its = cornTopLeft(coordNumb, coordLett, tablero);
+                    its2 = isLeft(coordNumb + 1, coordLett, tablero);
+                    its3 = isLeft(coordNumb + 2, coordLett, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
+
+
+                } else if (coordNumb == 7 && coordLett ==1) {
+                    its = isLeft(coordNumb, coordLett, tablero);
+                    its2 = isLeft(coordNumb + 1, coordLett, tablero);
+                    its3 = cornBotLeft(coordNumb + 2, coordLett, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
+
+
+                } else if (coordNumb ==7 && coordLett == 9) {
+                    its = isRight(coordNumb, coordLett, tablero);
+                    its2 = isRight(coordNumb + 1, coordLett, tablero);
+                    its3 = cornBotLeft(coordNumb + 2, coordLett, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
+
+                } else if ( coordNumb >7 ) {
+                    System.out.println("no cabe");
+
+                    todo =true;
+                } else if (coordNumb ==7) {
+
+                    its = inCenter(coordNumb, coordLett, tablero);
+                    its2 = inCenter(coordNumb + 1, coordLett, tablero);
+                    its3 = isBot(coordNumb + 2, coordLett, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
+
+                } else if (coordLett == 1) {
+
+                    its = isLeft(coordNumb, coordLett, tablero);
+                    its2 = isLeft(coordNumb + 1, coordLett, tablero);
+                    its3 = isLeft(coordNumb + 2, coordLett, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
+
+
+                } else if (coordLett == 9) {
+                    its = isRight(coordNumb, coordLett, tablero);
+                    its2 = isRight(coordNumb + 1, coordLett, tablero);
+                    its3 = isRight(coordNumb + 2, coordLett, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
+                } else if (coordNumb ==1) {
+                    its = isTop(coordNumb, coordLett, tablero);
+                    its2 = inCenter(coordNumb + 1, coordLett, tablero);
+                    its3 = inCenter(coordNumb + 2, coordLett, tablero);
+                    if (its || its2 || its3)
+                        todo = true;
+                } else if (coordNumb >7) {
+                    System.out.println("se sale del tablero");
+                    todo =true;
+
 
                 } else {
-                    //esquina arriba derecha
-                    if (coordNumb == 1 && coordLett == 9) {
-                        its = cornTopRight(coordNumb, coordLett, tablero);
-                        its2 = isRight(coordNumb + 1, coordLett, tablero);
-                        if (its || its2)
-                            todo = true;
-                        //esquina abajo derecha
-                    } else if (coordNumb == 9 && coordLett == 9) {
-                        System.out.println("no cabe");
-                        todo = false;
+                    its = inCenter(coordNumb, coordLett, tablero);
+                    its2 = inCenter(coordNumb + 1, coordLett, tablero);
+                    its3 = inCenter(coordNumb + 2, coordLett, tablero);
 
-                    } else if (coordNumb == 1 && coordLett == 1) {
-                        its = cornTopLeft(coordNumb, coordLett, tablero);
-                        its2 = isLeft(coordNumb + 1, coordLett, tablero);
-                        if (its || its2)
-                            todo = true;
-
-                        //esquina abajo izquierda
-                    } else if (coordNumb == 9 && coordLett == 1) {
-                        System.out.println("no cabe");
-                        todo = false;
-
-                        //comprobar  arriba
-                    } else if (coordNumb==8&& coordLett==1) {
-                        its = isRight(coordNumb, coordLett, tablero);
-                        its2 = isBot(coordNumb + 1, coordLett, tablero);
-                        if (its || its2)
-                            todo = true;
-                    } else if (coordNumb==8 && coordLett==9) {
-                        its = isRight(coordNumb, coordLett, tablero);
-                        its2 = cornBotLeft(coordNumb + 1, coordLett, tablero);
-                        if (its || its2)
-                            todo = true;
-
-                    } else if (coordNumb == 1) {
-                        its = isTop(coordNumb, coordLett, tablero);
-                        its2 = inCenter(coordNumb + 1, coordLett, tablero);
-                        if (its || its2)
-                            todo = true;
-                        //comprobar derecha
-                    } else if (coordLett == 9) {
-                        its = isRight(coordNumb, coordLett, tablero);
-                        its2 = isRight(coordNumb+1, coordLett, tablero);
-                        if (its || its2)
-                            todo = true;
-                        //comprobar abajo
-                    } else if (coordNumb == 9) {
-                        System.out.println("no cabe");
-                        todo=false;
-
-                        //comrpobar fila 8
-                    } else if (coordNumb == 8) {
-                        its = inCenter(coordNumb, coordLett, tablero);
-                        its2 = isBot(coordNumb + 1, coordLett, tablero);
-                        if (its || its2)
-                            todo = true;
-                    } else if (coordLett == 1) {
-                        its = isLeft(coordNumb, coordLett, tablero);
-                        its2 = isLeft(coordNumb + 1, coordLett, tablero);
-                        if (its || its2)
-                            todo = true;
-                        //centro
-                    } else {
-                        its = inCenter(coordNumb, coordLett, tablero);
-                        its2 = inCenter(coordNumb + 1, coordLett, tablero);
-                        if (its || its2)
-                            todo = true;
-                    }
-
+                    if (its || its2 || its3)
+                        todo = true;
                 }
-            } else if (orientation == 'H') {
-                if (coordLett + 1 >= 10) {
+
+            }
+        } else if (orientation == 'H') {
+            if (coordLett + 1 >= 10) {
+                System.out.println("te sales del tab");
+                todo =false;
+
+            } else {
+                //esquina arriba derecha
+                if (coordNumb == 1 && coordLett >= 7) {
                     System.out.println("te sales del tab");
-                    todo=false;
+                    todo = true;
 
+                    //esquina abajo derecha
+                } else if (coordNumb == 9 && coordLett == 9) {
+                    System.out.println("no cabe");
+                    todo = true;
+
+                } else if (coordNumb == 1 && coordLett == 1) {
+                    its = cornTopLeft(coordNumb, coordLett, tablero);
+                    its2 = isLeft(coordNumb, coordLett + 1, tablero);
+                    its3 = isLeft(coordNumb, coordLett + 2, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
+
+                    //esquina abajo izquierda
+                } else if (coordNumb == 9 && coordLett == 1) {
+                    its = cornBotLeft(coordNumb, coordLett, tablero);
+                    its2 = isBot(coordNumb, coordLett + 1, tablero);
+                    its3 = isBot(coordNumb, coordLett + 2, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
+                    //comprobar  arriba
+                } else if (coordNumb == 1 && coordLett == 8) {
+                    its = isTop(coordNumb, coordLett, tablero);
+                    its2 = cornTopRight(coordNumb, coordLett +1, tablero);
+                    its3 = cornTopRight(coordNumb, coordLett +2, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
+
+
+
+
+                } else if (coordNumb == 1) {
+                    its = isTop(coordNumb, coordLett, tablero);
+                    its2 = isTop(coordNumb, coordLett + 1, tablero);
+                    its3 = isTop(coordNumb, coordLett + 2, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
+                    //comprobar derecha
+                } else if (coordNumb ==9 && coordLett ==7) {
+                    its = isBot(coordNumb, coordLett, tablero);
+                    its2 = isBot(coordNumb, coordLett + 1, tablero);
+                    its3 = cornBotLeft(coordNumb, coordLett + 2, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
+                } else if (coordLett == 8) {
+                    System.out.println("no cabe");
+                    todo =true;
+
+
+                    //comprobar abajo
+                } else if (coordLett == 9) {
+                    System.out.println("no cabe");
+                    todo = true;
+
+                    //comrpobar fila 8
+
+                } else if (coordNumb == 9) {
+                    its = isBot(coordNumb, coordLett, tablero);
+                    its2 = isBot(coordNumb, coordLett + 1, tablero);
+                    its3 = isBot(coordNumb, coordLett + 2, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
+                } else if (coordLett ==7) {
+
+                    its = inCenter(coordNumb, coordLett, tablero);
+                    its2 = inCenter(coordNumb, coordLett + 1, tablero);
+                    its3 = isRight(coordNumb, coordLett + 2, tablero);
+
+                    if (its || its2 || its3)
+                        todo = true;
                 } else {
-                    //esquina arriba derecha
-                    if (coordNumb == 1 && coordLett == 9) {
-                        System.out.println("te sales del tab");
-                        todo = false;
+                    its = inCenter(coordNumb, coordLett, tablero);
+                    its2 = inCenter(coordNumb, coordLett + 1, tablero);
+                    its3 = inCenter(coordNumb, coordLett + 2, tablero);
 
-                        //esquina abajo derecha
-                    } else if (coordNumb == 9 && coordLett == 9) {
-                        System.out.println("no cabe");
-                        todo = false;
-
-                    } else if (coordNumb == 1 && coordLett == 1) {
-                        its = cornTopLeft(coordNumb, coordLett, tablero);
-                        its2 = isTop(coordNumb, coordLett + 1, tablero);
-                        if (its || its2)
-                            todo = true;
-
-                        //esquina abajo izquierda
-                    } else if (coordNumb == 9 && coordLett == 1) {
-                        its = cornBotLeft(coordNumb, coordLett, tablero);
-                        its2 = isBot(coordNumb, coordLett + 1, tablero);
-                        if (its || its2)
-                            todo = true;
-                        //comprobar  arriba
-                    } else if (coordNumb == 1 && coordLett == 8) {
-                        its = isTop(coordNumb, coordLett, tablero);
-                        its2 = cornTopRight(coordNumb, coordLett+1, tablero);
-                        if (its || its2)
-                            todo = true;
-
-
-                    } else if (coordNumb==8 && coordLett==8) {
-
-                        its = inCenter(coordNumb, coordLett, tablero);
-                        its2 = isRight(coordNumb, coordLett+1, tablero);
-                        if (its || its2)
-                            todo = true;
-
-                    } else if (coordNumb==9 && coordLett==8) {
-                        its = isBot(coordNumb, coordLett, tablero);
-                        its2 = cornBotLeft(coordNumb, coordLett+1, tablero);
-                        if (its || its2)
-                            todo = true;
-                    } else if (coordNumb == 1) {
-                        its = isTop(coordNumb, coordLett, tablero);
-                        its2 = isTop(coordNumb, coordLett + 1, tablero);
-                        if (its || its2)
-                            todo = true;
-                        //comprobar derecha
-                    } else if (coordLett == 8) {
-                        its = inCenter(coordNumb, coordLett, tablero);
-                        its2 = isRight(coordNumb, coordLett + 1, tablero);
-                        if (its || its2)
-                            todo = true;
-                        //comprobar abajo
-                    } else if (coordLett == 9) {
-                        System.out.println("no cabe");
-                        todo=false;
-
-                        //comrpobar fila 8
-
-                    } else if (coordNumb == 9) {
-                        its = isBot(coordNumb, coordLett, tablero);
-                        its2 = isBot(coordNumb, coordLett + 1, tablero);
-                        if (its || its2)
-                            todo = true;
-                    } else {
-                        its = inCenter(coordNumb, coordLett, tablero);
-                        its2 = inCenter(coordNumb, coordLett + 1, tablero);
-                        if (its || its2)
-                            todo = true;
-                    }
+                    if (its || its2 || its3)
+                        todo = true;
                 }
             }
-        } else if (size == 3) {
-            if (orientation == 'V') {
-                if (coordNumb + 1 >= 10) {
-                    System.out.println("te sales del tab");
+        }
+        return todo;
+    }
+
+    private static boolean twoLives(int coordNumb, int coordLett, char[][] tablero, char orientation, boolean todo) {
+        boolean its2;
+        boolean its;
+        if (orientation == 'V') {
+            if (coordNumb + 1 >= 10) {
+                System.out.println("te sales del tab");
+                todo =false;
+
+            } else {
+                //esquina arriba derecha
+                if (coordNumb == 1 && coordLett == 9) {
+                    its = cornTopRight(coordNumb, coordLett, tablero);
+                    its2 = isRight(coordNumb + 1, coordLett, tablero);
+                    if (its || its2)
+                        todo = true;
+                    //esquina abajo derecha
+                } else if (coordNumb == 9 && coordLett == 9) {
+                    System.out.println("no cabe");
+                    todo = false;
+
+                } else if (coordNumb == 1 && coordLett == 1) {
+                    its = cornTopLeft(coordNumb, coordLett, tablero);
+                    its2 = isLeft(coordNumb + 1, coordLett, tablero);
+                    if (its || its2)
+                        todo = true;
+
+                    //esquina abajo izquierda
+                } else if (coordNumb == 9 && coordLett == 1) {
+                    System.out.println("no cabe");
+                    todo = false;
+
+                    //comprobar  arriba
+                } else if (coordNumb ==8&& coordLett ==1) {
+                    its = isRight(coordNumb, coordLett, tablero);
+                    its2 = isBot(coordNumb + 1, coordLett, tablero);
+                    if (its || its2)
+                        todo = true;
+                } else if (coordNumb ==8 && coordLett ==9) {
+                    its = isRight(coordNumb, coordLett, tablero);
+                    its2 = cornBotLeft(coordNumb + 1, coordLett, tablero);
+                    if (its || its2)
+                        todo = true;
+
+                } else if (coordNumb == 1) {
+                    its = isTop(coordNumb, coordLett, tablero);
+                    its2 = inCenter(coordNumb + 1, coordLett, tablero);
+                    if (its || its2)
+                        todo = true;
+                    //comprobar derecha
+                } else if (coordLett == 9) {
+                    its = isRight(coordNumb, coordLett, tablero);
+                    its2 = isRight(coordNumb +1, coordLett, tablero);
+                    if (its || its2)
+                        todo = true;
+                    //comprobar abajo
+                } else if (coordNumb == 9) {
+                    System.out.println("no cabe");
+                    todo =false;
+
+                    //comrpobar fila 8
+                } else if (coordNumb == 8) {
+                    its = inCenter(coordNumb, coordLett, tablero);
+                    its2 = isBot(coordNumb + 1, coordLett, tablero);
+                    if (its || its2)
+                        todo = true;
+                } else if (coordLett == 1) {
+                    its = isLeft(coordNumb, coordLett, tablero);
+                    its2 = isLeft(coordNumb + 1, coordLett, tablero);
+                    if (its || its2)
+                        todo = true;
+                    //centro
                 } else {
-                    if (coordNumb == 1 && coordLett == 9) {
-                        its = cornTopRight(coordNumb, coordLett, tablero);
-                        its2 = isRight(coordNumb + 1, coordLett, tablero);
-                        its3 = isRight(coordNumb + 2, coordLett, tablero);
-                        if (its || its2 || its3)
-                            todo = true;
-                    } else if (coordNumb == 1 && coordLett == 1) {
-                        its = cornTopLeft(coordNumb, coordLett, tablero);
-                        its2 = isLeft(coordNumb + 1, coordLett, tablero);
-                        its3 = isLeft(coordNumb + 2, coordLett, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-
-
-                    } else if (coordNumb == 7 && coordLett==1) {
-                        its = isLeft(coordNumb, coordLett, tablero);
-                        its2 = isLeft(coordNumb + 1, coordLett, tablero);
-                        its3 = cornBotLeft(coordNumb + 2, coordLett, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-
-
-                    } else if (coordNumb==7 && coordLett== 9) {
-                        its = isRight(coordNumb, coordLett, tablero);
-                        its2 = isRight(coordNumb + 1, coordLett, tablero);
-                        its3 = cornBotLeft(coordNumb + 2, coordLett, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-
-                    } else if ( coordNumb>7 ) {
-                        System.out.println("no cabe");
-
-                        todo=true;
-                    } else if (coordNumb==7) {
-
-                        its = inCenter(coordNumb, coordLett, tablero);
-                        its2 = inCenter(coordNumb + 1, coordLett, tablero);
-                        its3 = isBot(coordNumb + 2, coordLett, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-
-                    } else if (coordLett == 1) {
-
-                        its = isLeft(coordNumb, coordLett, tablero);
-                        its2 = isLeft(coordNumb + 1, coordLett, tablero);
-                        its3 = isLeft(coordNumb + 2, coordLett, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-
-
-                    } else if (coordLett == 9) {
-                        its = isRight(coordNumb, coordLett, tablero);
-                        its2 = isRight(coordNumb + 1, coordLett, tablero);
-                        its3 = isRight(coordNumb + 2, coordLett, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-                    } else if (coordNumb==1) {
-                        its = isTop(coordNumb, coordLett, tablero);
-                        its2 = inCenter(coordNumb + 1, coordLett, tablero);
-                        its3 = inCenter(coordNumb + 2, coordLett, tablero);
-                        if (its || its2 || its3)
-                            todo = true;
-                    } else if (coordNumb>7) {
-                        System.out.println("se sale del tablero");
-                        todo=true;
-
-
-                    } else {
-                        its = inCenter(coordNumb, coordLett, tablero);
-                        its2 = inCenter(coordNumb + 1, coordLett, tablero);
-                        its3 = inCenter(coordNumb + 2, coordLett, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-                    }
-
+                    its = inCenter(coordNumb, coordLett, tablero);
+                    its2 = inCenter(coordNumb + 1, coordLett, tablero);
+                    if (its || its2)
+                        todo = true;
                 }
-            } else if (orientation == 'H') {
-                if (coordLett + 1 >= 10) {
+
+            }
+        } else if (orientation == 'H') {
+            if (coordLett + 1 >= 10) {
+                System.out.println("te sales del tab");
+                todo =false;
+
+            } else {
+                //esquina arriba derecha
+                if (coordNumb == 1 && coordLett == 9) {
                     System.out.println("te sales del tab");
-                    todo=false;
+                    todo = false;
 
+                    //esquina abajo derecha
+                } else if (coordNumb == 9 && coordLett == 9) {
+                    System.out.println("no cabe");
+                    todo = false;
+
+                } else if (coordNumb == 1 && coordLett == 1) {
+                    its = cornTopLeft(coordNumb, coordLett, tablero);
+                    its2 = isTop(coordNumb, coordLett + 1, tablero);
+                    if (its || its2)
+                        todo = true;
+
+                    //esquina abajo izquierda
+                } else if (coordNumb == 9 && coordLett == 1) {
+                    its = cornBotLeft(coordNumb, coordLett, tablero);
+                    its2 = isBot(coordNumb, coordLett + 1, tablero);
+                    if (its || its2)
+                        todo = true;
+                    //comprobar  arriba
+                } else if (coordNumb == 1 && coordLett == 8) {
+                    its = isTop(coordNumb, coordLett, tablero);
+                    its2 = cornTopRight(coordNumb, coordLett +1, tablero);
+                    if (its || its2)
+                        todo = true;
+
+
+                } else if (coordNumb ==8 && coordLett ==8) {
+
+                    its = inCenter(coordNumb, coordLett, tablero);
+                    its2 = isRight(coordNumb, coordLett +1, tablero);
+                    if (its || its2)
+                        todo = true;
+
+                } else if (coordNumb ==9 && coordLett ==8) {
+                    its = isBot(coordNumb, coordLett, tablero);
+                    its2 = cornBotLeft(coordNumb, coordLett +1, tablero);
+                    if (its || its2)
+                        todo = true;
+                } else if (coordNumb == 1) {
+                    its = isTop(coordNumb, coordLett, tablero);
+                    its2 = isTop(coordNumb, coordLett + 1, tablero);
+                    if (its || its2)
+                        todo = true;
+                    //comprobar derecha
+                } else if (coordLett == 8) {
+                    its = inCenter(coordNumb, coordLett, tablero);
+                    its2 = isRight(coordNumb, coordLett + 1, tablero);
+                    if (its || its2)
+                        todo = true;
+                    //comprobar abajo
+                } else if (coordLett == 9) {
+                    System.out.println("no cabe");
+                    todo =false;
+
+                    //comrpobar fila 8
+
+                } else if (coordNumb == 9) {
+                    its = isBot(coordNumb, coordLett, tablero);
+                    its2 = isBot(coordNumb, coordLett + 1, tablero);
+                    if (its || its2)
+                        todo = true;
                 } else {
-                    //esquina arriba derecha
-                    if (coordNumb == 1 && coordLett >= 7) {
-                        System.out.println("te sales del tab");
+                    its = inCenter(coordNumb, coordLett, tablero);
+                    its2 = inCenter(coordNumb, coordLett + 1, tablero);
+                    if (its || its2)
                         todo = true;
-
-                        //esquina abajo derecha
-                    } else if (coordNumb == 9 && coordLett == 9) {
-                        System.out.println("no cabe");
-                        todo = true;
-
-                    } else if (coordNumb == 1 && coordLett == 1) {
-                        its = cornTopLeft(coordNumb, coordLett, tablero);
-                        its2 = isLeft(coordNumb, coordLett + 1, tablero);
-                        its3 = isLeft(coordNumb, coordLett + 2, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-
-                        //esquina abajo izquierda
-                    } else if (coordNumb == 9 && coordLett == 1) {
-                        its = cornBotLeft(coordNumb, coordLett, tablero);
-                        its2 = isBot(coordNumb, coordLett + 1, tablero);
-                        its3 = isBot(coordNumb, coordLett + 2, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-                        //comprobar  arriba
-                    } else if (coordNumb == 1 && coordLett == 8) {
-                        its = isTop(coordNumb, coordLett, tablero);
-                        its2 = cornTopRight(coordNumb, coordLett+1, tablero);
-                        its3 = cornTopRight(coordNumb, coordLett+2, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-
-
-
-
-                    } else if (coordNumb == 1) {
-                        its = isTop(coordNumb, coordLett, tablero);
-                        its2 = isTop(coordNumb, coordLett + 1, tablero);
-                        its3 = isTop(coordNumb, coordLett + 2, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-                        //comprobar derecha
-                    } else if (coordNumb==9 && coordLett==7) {
-                        its = isBot(coordNumb, coordLett, tablero);
-                        its2 = isBot(coordNumb, coordLett + 1, tablero);
-                        its3 = cornBotLeft(coordNumb, coordLett + 2, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-                    } else if (coordLett == 8) {
-                        System.out.println("no cabe");
-                        todo=true;
-
-
-                        //comprobar abajo
-                    } else if (coordLett == 9) {
-                        System.out.println("no cabe");
-                        todo = true;
-
-                        //comrpobar fila 8
-
-                    } else if (coordNumb == 9) {
-                        its = isBot(coordNumb, coordLett, tablero);
-                        its2 = isBot(coordNumb, coordLett + 1, tablero);
-                        its3 = isBot(coordNumb, coordLett + 2, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-                    } else if (coordLett==7) {
-
-                        its = inCenter(coordNumb, coordLett, tablero);
-                        its2 = inCenter(coordNumb, coordLett + 1, tablero);
-                        its3 = isRight(coordNumb, coordLett + 2, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-                    } else {
-                        its = inCenter(coordNumb, coordLett, tablero);
-                        its2 = inCenter(coordNumb, coordLett + 1, tablero);
-                        its3 = inCenter(coordNumb, coordLett + 2, tablero);
-
-                        if (its || its2 || its3)
-                            todo = true;
-                    }
                 }
             }
         }
@@ -521,11 +535,14 @@ public class Barco {
 
     public static boolean cornBotRight(int coordNumb, int coordLett, char[][] tablero) {
         boolean its = false;
+        boolean error = false;
+
 
         if (tablero[coordNumb][coordLett] == 'B' || tablero[coordNumb - 1][coordLett] == 'B' || tablero[coordNumb][coordLett + 1] == 'B') {
             System.out.println("ya hay un barco o hay uno muy cerca");
             its = true;
         }
+
         return its;
     }
 

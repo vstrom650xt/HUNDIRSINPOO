@@ -40,15 +40,14 @@ public class Juego {
 
         do {
             System.out.println("tu turno");
-//            Jugador.shootPlayer(tableroShootPlayer,tableroEnemy,totalVidasPc);
+            Tablero.verTodosTab(tableroPlayer, tableroShootPlayer, tableroEnemy, tableroShootEnemy);
             if(Jugador.shootPlayer(tableroShootPlayer, tableroEnemy, totalVidasPc)){
                 totalVidasPc--;
 
             }
-            Tablero.verTodosTab(tableroPlayer, tableroShootPlayer, tableroEnemy, tableroShootEnemy);
             System.out.println();
+            Screen.clear();
             System.out.println("-------------------------------------------------------------------------------");
-
             System.out.println();
             if (Pc.shootPc(tableroShootEnemy,tableroPlayer,vidasJugador)){
                 vidasJugador--;
@@ -56,6 +55,14 @@ public class Juego {
             }
 
             Tablero.verTodosTab(tableroPlayer, tableroShootPlayer, tableroEnemy, tableroShootEnemy);
+
+            if (vidasJugador==0){
+                System.out.println("YOU LOSE");
+            }else if (totalVidasPc==0){
+                System.out.println("YOU WIN");
+            }
+
+
 
         } while (vidasJugador != 0 && totalVidasPc != 0);
 
